@@ -215,9 +215,6 @@ textarea {
     rgba(227, 227, 227, 0.7311411625196953) 95%
   );
 }
-/* button{
-    border: none;
-} */
 .icon-ok:active,
 .icon-box:active {
   background: #eee;
