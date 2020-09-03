@@ -12,15 +12,15 @@
    -ms-overflow-style: none; /* IE and Edge */
    scrollbar-width: none; 
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
 body {
   text-align: center;
   /* background: #667b85; */
   background: #ecf0f1;
   min-width: 550px;
-}
-/* Hide scrollbar for Chrome, Safari and Opera */
-body::-webkit-scrollbar {
-  display: none;
 }
 header {
   margin-top: 15px;
