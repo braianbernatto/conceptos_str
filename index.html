@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="script.js"></script>
+    
     <link rel="shortcut icon" href="img/logo.png" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="./font/fontello.css" />
@@ -55,7 +55,9 @@
           value="144"
         />
         <select name="rubro_detalle" id="rubro_detalle">
-          <option value="">JORNALES (BONIFICACIONES Y GRATIFICACIONES)</option>
+          <option value="">
+            -----SELECCIONAR DESCRIPCIÓN-----
+          </option>
         </select>
       </div>
       <div class="div_resize">
@@ -86,7 +88,7 @@
       </div>
       <div class="div_resize">
         <label class="L5 mainlabels" for="year">AÑO</label>
-        <input type="text" id="year" class="short" value="2020" />
+        <input type="text" id="year" class="short"/>
       </div>
       <div class="div_resize">
         <label class="L6 mainlabels" for="tipo">TIPO</label>
@@ -100,15 +102,14 @@
         />
       </div>
       <div class="text_area">
-        <textarea name="" id="" cols="50" rows="6" spellcheck="false">
-        TIPO 2 - PROGRAMA 2 - SERVICIOS SOCIALES DE CALIDAD - RUBRO 144 JORNALES (BONIFICACIONES Y GRATIFICACIONES) DE NOVIEMBRE/2020 - BENEFICIARIO: 11 - ASOC. DE FUNCIONARIOS DEL REGISTRO ELECTORAL DE LUQUE</textarea
-        >
+        <textarea name="resultado" id="resultado" cols="50" rows="6" spellcheck="false">TIPO 2 - PROGRAMA 2 - SERVICIOS SOCIALES DE CALIDAD - RUBRO 144 JORNALES (BONIFICACIONES Y GRATIFICACIONES) DE NOVIEMBRE/2020 - BENEFICIARIO: 11 - ASOC. DE FUNCIONARIOS DEL REGISTRO ELECTORAL DE LUQUE</textarea>
       </div>
       <div class="ultimo">
         <button for="ok" class="icon-ok" id="boton1"></button>
         <button for="caja" class="icon-box" id="boton2"></button>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
   <footer>
     <p class="sign animate__animated animate__bounceInUp">by Bernatto</p>
