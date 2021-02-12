@@ -24,16 +24,19 @@ function cargarRubrosDescri() {
 
 // COPIAR FUNCION
 function copiar(event) {
-  let tipo = document.getElementById("tipo");
-  let programa = document.getElementById("programa");
-  let programaDescri = document.getElementById("programa_detalle");
-  let rubro = document.getElementById("rubro_nro");
-  let rubroDescri = document.getElementById("rubro_detalle");
-  let mes = document.getElementById("mes");
-  let year = document.getElementById("year");
-  let beneficiario = document.getElementById("beneficiarios");
+  let tipo = document.getElementById("tipo").value;
+  let programa = document.getElementById("programa").value;
+  let programaDescri = document.getElementById("programa_detalle").value;
+  let rubro = document.getElementById("rubro_nro").value;
+  let rubroDescri = document.getElementById("rubro_detalle").value;
+  let mes = document.getElementById("mes").value;
+  let year = document.getElementById("year").value;
+  let beneficiario = document.getElementById("beneficiarios").value;
 
+  let unir = "TIPO "+tipo+" - PROGRAMA "+programa+" - "+programaDescri+" - RUBRO "+rubro+" "+rubroDescri+" DE "+
+  mes+"/"+year+" - BENEFICIARIO: "+beneficiario;
   let final = document.getElementById("resultado");
+  final.value = unir;
   /* Select the text field */
   final.select();
   /* Copy the text inside the text field */
@@ -58,6 +61,7 @@ document.addEventListener(
   "DOMContentLoaded",
   function () {
     year();
+    cargarRubrosDescri()
   },
   false
 );
