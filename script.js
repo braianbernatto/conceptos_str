@@ -27,7 +27,6 @@ function cargarRubrosDescri() {
 
 // COPIAR FUNCION
 function copiar(event) {
-console.log(boton);
   let tipo = document.getElementById("tipo").value;
   let programa = document.getElementById("programa").value;
   let programaDescri = document.getElementById("programa_detalle").value;
