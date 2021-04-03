@@ -139,8 +139,8 @@ input {
   -moz-box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
 }
-select {
-  text-align: center;
+select, option {
+  text-align-last: center;
   align-self: start;
   font-size: 20px;
   margin: 7px 0;
