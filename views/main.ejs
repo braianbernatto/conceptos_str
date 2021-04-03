@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/logo.png"/>
+    <link rel="stylesheet" href="/styles.css"/>
+    <link rel="stylesheet" href="/font/fontello.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+    />
+    <!-- GOOGLE FONTS -->
+    <link
+    href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap"
+    rel="stylesheet"
+    />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;700&family=Open+Sans&display=swap"
+    rel="stylesheet"
+    />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap"
+    rel="stylesheet"
+    />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap"
+    rel="stylesheet"
+    />
+    <title>STR-CONCEPTOS</title>
+  </head>
+  <body>
+    <header class="">
+      <img src="/img/logo.png" width="100" />
+      <div class="div_h1">
+        <h1>
+          STR <br />
+          CONCEPTOS
+        </h1>
+      </div>
+    </header>
+    <div class="container animate__animated animate__bounceInUp">
+      <div class="div_resize">
+        <label for="nivel" class="L1 mainlabels">NIVEL</label>
+        <input id="nivel" name="nivel" type="number" class="short" readonly/>
+        <input
+          type="text"
+          id="nivel_descri"
+          class="long"
+          readonly
+        />
+      </div>
+      <div class="div_resize">
+        <label id="rubro_btn" for="rubro_nro" class="L2 mainlabels">RUBRO</label>
+        <input name="rubro_nro" id="rubro_nro" type="number" class="short rubro_nro" onclick="this.select()"/>
+        <select name="rubro_detalle" id="rubro_detalle">
+          <option class="" id="rubro_option" value="0">
+            -----CARGAR RUBRO-----
+          </option>    
+          
+        </select>
+      </div>
+      <div class="div_resize">
+        <label class="L3 mainlabels" for="beneficiarios">DESCUENTOS</label>
+        <select name="beneficiarios" id="beneficiarios">
+          <option class="" id="opt_benef" value="0">-----SELECCIONAR BENEFICIARIO-----</option>
+          <% benef.forEach(function (benef) { %>
+            <option class="" value="<%= benef.desc_beneficiario %>"><%= benef.desc_beneficiario %></option>
+          <% }) %> 
+        </select>
+      </div>
+      <div class="">
+        <label class="L4 mainlabels" for="mes">MES</label>
+        <select name="mes" id="mes" class="">
+          <% mes.forEach(function (mes) { %>
+            <option class="" value="<%= mes.mes_descri %>"><%= mes.mes_descri %></option>
+          <% }) %>
+
+        </select>
+      </div>
+      <div class="div_resize">
+        <label class="L5 mainlabels" for="year">AÑO</label>
+        <input type="text" id="year" class="short" value="<%= new Date().getFullYear() %>"/>
+      </div>
+      <div class="div_resize">
+        <label class="L6 mainlabels" for="tipo">TIPO</label>
+        <input type="text" id="tipo" class="short" value="" onclick="this.select()"/>
+        <input type="text" id="programa" class="short" value="" onclick="this.select()"/>
+        <input
+          type="text"
+          id="programa_detalle"
+          class="long"
+        />
+      </div>
+      <div class="text_area">
+        <textarea name="resultado" id="resultado" cols="50" rows="6" spellcheck="false"></textarea>
+      </div>
+      <div class="ultimo">
+        <button for="ok" class="icon-ok" id="boton1"></button>
+        <button for="caja" class="icon-box" id="boton2"></button>
+      </div>
+    </div>
+    <script src="/main-bundled.js"></script>
+    <!-- <script src="/server/db.js"></script> -->
+    <!-- <script src="/server/index.js"></script> -->
+  </body>
+  <footer>
+    <p class="sign animate__animated animate__bounceInUp">by Bernatto</p>
+    <p class="sign animate__animated animate__bounceInUp">Copyright &copy; <%= new Date().getFullYear() %> </p>
+  </footer>
+</html>

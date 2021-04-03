@@ -1,11 +1,8 @@
-function cargarRubrosDescri() {
-  let rubroDetalle = [
-    "JORNALES (BONIFICACIONES Y GRATIFICACIONES)",
-    "JORNALES (SUBSIDIO FAMILIAR)",
-    "JORNALES (HORAS EXTRAS)",
-    "HONORARIOS PROFESIONALES",
-    "SUELDOS",
-  ];
+const server = require("./server/index");
+
+
+function cargarRubrosDescri(datos) {
+  let rubroDetalle = [datos]
   let comboRubroDetalle = document.getElementById("rubro_detalle");
 
   if (comboRubroDetalle.length > 1) {
@@ -76,7 +73,7 @@ function year() {
 const rubroNro = document.getElementById("rubro_nro");
 const rubroDetalle = document.getElementById("rubro_detalle");
 
-rubroNro.addEventListener("focusout", cargarRubrosDescri);
+rubroNro.addEventListener("focusout", btndatos.click());
 rubroNro.addEventListener("keyup", function (event) {
   // Number 13 is the "Enter" key on the keyboard
   if (event.keyCode === 13) {
@@ -100,6 +97,11 @@ btnCaja.addEventListener("click", () => {
   copiar();
 });
 
+btndatos.addEventListener("click", async () => {
+  console.log("entro en evento click")
+  cargarRubrosDescri(server.listar());
+});
+
 document.addEventListener(
   "DOMContentLoaded",
   function () {
@@ -107,3 +109,26 @@ document.addEventListener(
   },
   false
 );
+
+
+
+// /////////////////////
+
+// routes
+app.get("/", async (req, res) => {
+  try {
+    const consulta = await pool.query("select rub_descri from rubros");
+    res.json(consulta.rows);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
+const listar = async () => {
+  try {
+    const consulta = await pool.query("select rub_descri from rubros");
+    console.log(consulta.rows);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
