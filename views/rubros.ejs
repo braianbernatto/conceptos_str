@@ -1,0 +1,38 @@
+<div class="wrap">
+    <!-- ADD -->
+      <form action="/addRubro" method="POST" class="addForm animate__animated animate__bounceInDown" id="addForm">
+        <div class="div_resize">
+          <label id="" for="addRubroNro" class="titles">AGREGAR RUBRO</label>
+          <label id="" for="addRubroNro" class="L2 mainlabels">RUBRO</label>
+          <input name="addRubroNro" id="addRubroNro" type="number" class="short" onclick="this.select()"/>
+          <input  name="addRubroDescri" type="text" id="addRubroDescri" class="long"/>
+        </div>
+        <div class="div_resize">
+          <label for="addRubroNivel" class="L1 mainlabels">NIVEL</label>
+          <input id="addRubroNivel" name="addRubroNivel" type="number" class="short"/>
+        </div>
+        <div class="btnActions">
+          <button for="" class="btnGuardar" id="btnGuardar">Guardar</button>
+          <button for="" class="btnCancelar" id="btnCancelar">Cancelar</button>
+        </div>
+      </form>  
+      <!-- UPDATE -->
+      <form action="/updateRubro" method="POST" class="updateForm animate__animated animate__bounceInDown" id="updateForm">
+        <div class="div_resize">
+          <label id="" for="updateRubroNro" class="titles">MODIFICAR RUBRO</label>
+          <label id="rubro_btn2" for="updateRubroNro" class="L2 mainlabels">RUBRO</label>
+          <input name="updateRubroNro" id="updateRubroNro" type="number" class="short rubro_nro2" onclick="this.select()"/>
+          <input type="text" id="nivel_descri2" class="long"/>
+        </div>
+        <div class="div_resize">
+          <label for="updateNivelRubro" class="L1 mainlabels">NIVEL</label>
+          <input id="updateNivelRubro" name="updateNivelRubro" type="number" class="short"/>
+        </div>
+        <div class="btnActions">
+          <button for="" class="btnGuardar" id="btnGuardar">Modificar</button>
+          <button for="" class="btnCancelar" id="btnCancelar">Cancelar</button>
+        </div>
+      </form> 
+      
+      
+    </div>

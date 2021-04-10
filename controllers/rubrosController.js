@@ -18,11 +18,14 @@ exports.nivel = async function (req, res) {
       }    
 }
 
-exports.tipoPrograma = async function (req, res) {
-  try {
-    let tipo = await Rubros.getTipoPrograma(req.body.tipo, req.body.programa)        
-    res.json(tipo)  
-      } catch (error) {
-        console.log(error)
-      }    
+exports.addRubro = function (req, res) {
+  let rubros = new Rubros(req.body) 
+  rubros.addRubro().then(()=>{
+    req.flash("success","¡Agregado con éxito!")
+    req.session.save(()=> res.redirect(`/`))
+  }).catch(function(errors){
+    errors.forEach(error => req.flash("errors", error))
+    req.session.save(()=> res.redirect(`/`))
+    console.log(errors)
+  })
 }

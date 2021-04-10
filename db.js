@@ -1,6 +1,7 @@
 const dotenv = require("dotenv")
 dotenv.config()
 const Pool = require("pg-promise")({})
+const pgSession = require("connect-pg-simple")
 
 const pool = Pool({
     user: process.env.PGUSER,

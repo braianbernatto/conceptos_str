@@ -2,11 +2,13 @@ const express = require("express")
 const router = express.Router()
 const UserController = require("./controllers/userController")
 const RubrosController = require("./controllers/rubrosController")
+const TipoProgramaController = require("./controllers/tipoProgramaController")
 
-// user related routes
+// rubros related routes
 router.get("/", UserController.home)
 router.post("/rubrosByNro", RubrosController.byNro)
 router.post("/nivelById", RubrosController.nivel)
-router.post("/tipoPrograma", RubrosController.tipoPrograma)
+router.post("/tipoPrograma", TipoProgramaController.getTipoPrograma)
+router.post("/addRubro", RubrosController.addRubro)
 
 module.exports = router

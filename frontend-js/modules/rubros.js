@@ -9,6 +9,10 @@ let programa = document.getElementById("programa")
 let rubroNro = document.querySelector("#rubro_nro")
 let btnOk = document.querySelector("#boton1")
 let btnCaja = document.querySelector("#boton2")
+let benefSelect = document.querySelector("#beneficiarios")
+let btnRubro = document.querySelector("#btn__rubro")
+let addForm = document.querySelector("#addForm")
+let updateForm = document.querySelector("#updateForm")
 
 let rubroAnterior = ""
 
@@ -17,8 +21,11 @@ nivel.value = ""
 nivelDescri.value = ""
 document.querySelector("#rubro_nro").value = ""
 document.querySelector("#rubro_detalle").value = 0
-document.querySelector("#beneficiarios").value = 0
-
+benefSelect.value = 0
+setTimeout(() => {
+    rubroNro.focus()
+  }, 1000);
+  
 export default class rubros {
   constructor() {
     this.events()
@@ -26,6 +33,16 @@ export default class rubros {
 
   // events
   events() { 
+    btnRubro.addEventListener("click", ()=> {
+      if (document.querySelector("#addForm").style.display != "flex") {
+        document.querySelector("#addForm").style.display = "flex"
+        document.querySelector("#updateForm").style.display = "flex"
+      }else{
+        document.querySelector("#addForm").style.display = "none"
+        document.querySelector("#updateForm").style.display = "none"
+      }
+    })
+
    
     rubroNro.addEventListener("focusout", ()=>{
       if (rubroNro.value != rubroAnterior) {
@@ -149,7 +166,8 @@ export default class rubros {
   }
 
   tipoPrograma() {
-    axios
+    if (tipo.value.trim() != "" && programa.value.trim() != "") {
+      axios
     .post(`/tipoPrograma`, { tipo: document.querySelector("#tipo").value, programa: document.querySelector("#programa").value })
     .then((response) => {
         programa_detalle.value = response.data[0].prog_descri        
@@ -157,6 +175,7 @@ export default class rubros {
       .catch(() => {
         programa_detalle.value = ""
       })
+    }
   }
 
   copiar() {
@@ -198,6 +217,8 @@ export default class rubros {
       final.select();
       /* Copy the text inside the text field */
       document.execCommand("copy");
+      rubroNro.select()
+      benefSelect.value = 0
     }else if (tipo.trim() == "" || programa.trim() == "" || programaDescri.trim() == "") {
       final.value = (`¡Te faltó cargar tipo programa!`)
     }else{
