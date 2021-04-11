@@ -361,6 +361,6 @@ button{
   flex-direction: column;
   position: absolute;
   top: 1rem;
-  /* right: 0; */
+  right: 15px;
   justify-content: right;
 }
