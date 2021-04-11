@@ -3,7 +3,6 @@ const app = express()
 const cors = require("cors")
 const flash = require("connect-flash")
 const session = require("express-session")
-const pgSession = require("connect-pg-simple")(session)
 const pool = require("./db")
 
 
@@ -13,15 +12,15 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 
-
 let sessionOptions = session({
-    store: new pgSession({}),
     secret: process.env.SESSIONPASS,
+    store: new (require('connect-pg-simple')(session))(),
     resave: false,
     saveUninitialized: false,
-    cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true, secure: true}
+    cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true}    
 })
 
+app.set('trust proxy', 1) // trust first proxy
 app.use(sessionOptions)
 app.use(flash())
 

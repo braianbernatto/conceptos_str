@@ -104,7 +104,23 @@ export default class rubros {
       }
     })
 
+
+    document.querySelector("#btnCancelar").addEventListener("click", function (event) {
+     
+        event.preventDefault()
+        console.log("entro en boton cancelar")
+        axios
+        .post(`/logout`)
+        .then((response) => {                  
+          })
+          .catch(() => {
+            
+          })
+    })
+
+
   }
+
 
   // methods
   removeRubros() {

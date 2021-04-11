@@ -1,7 +1,9 @@
-<% errors.forEach(function(message){ %>
-    <div class="flash flashError"><%= message %></div>
-<% }) %>
-
-<% success.forEach(function(message){ %>
-    <div class="flash flashSuccess"><%= message %></div>
-<% }) %>
+<div class="flashContainer animate__animated animate__bounceInRight">
+    <% errors.forEach(function(message){ %>
+        <div class="flash flashError"><%= message %></div>
+    <% }) %>
+    
+    <% success.forEach(function(message){ %>
+        <div class="flash flashSuccess"><%= message %></div>
+    <% }) %>
+</div>

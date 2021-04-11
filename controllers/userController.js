@@ -7,11 +7,26 @@ exports.home = async function (req, res) {
 
         let mes = await pool.query("select mes_descri from mes")        
         
-        req.session.user = "bernatto"
-
-        res.render("main", {benef: benef, mes: mes, user: req.session.user})       
+        
+        if (req.session.views) {
+          req.session.views++
+          
+        }else{
+          req.session.views = 1
+          
+        }
+        req.session.save()
+        console.log(req.session.views)
+        res.render("main", {benef: benef, mes: mes, views: req.session.wiews})   
         
       } catch (error) {
         console.log(error)
       }
+}
+
+exports.logOut = function (req, res) {
+  console.log(req.session)   
+  req.session.destroy()
+  console.log(req.session)   
+  res.send("You are now logged out")
 }

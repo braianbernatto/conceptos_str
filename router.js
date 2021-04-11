@@ -11,4 +11,7 @@ router.post("/nivelById", RubrosController.nivel)
 router.post("/tipoPrograma", TipoProgramaController.getTipoPrograma)
 router.post("/addRubro", RubrosController.addRubro)
 
+// user related routes
+router.post("/logout", UserController.logOut)
+
 module.exports = router

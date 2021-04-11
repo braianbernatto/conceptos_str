@@ -326,5 +326,41 @@ button{
 }
 .flash{
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  min-width: 375px;
+  max-width: 850px;
+  text-align: center;
+  margin: 0px auto;
+  padding: 10px 10px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  background: rgb(255, 255, 255);
+  font-size: 1.1rem;
+ 
+}
+
+.flashError{
+  color: rgb(99, 7, 7);
+  background: linear-gradient(180deg,rgb(243, 200, 200) 0%,rgba(255, 178, 178, 0.731) 95%);
+  -webkit-box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.flashSuccess{
+  color: rgb(18, 63, 4);
+  background: linear-gradient(180deg,rgb(189, 252, 192) 0%,rgba(193, 253, 196, 0.731) 95%);
+  -webkit-box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.flashContainer{
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 1rem;
+  /* right: 0; */
+  justify-content: right;
 }
