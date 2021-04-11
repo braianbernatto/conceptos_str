@@ -3,6 +3,9 @@ const app = express()
 const cors = require("cors")
 const flash = require("connect-flash")
 const session = require("express-session")
+const pgSession = require("connect-pg-simple")(session)
+const pool = require("./db")
+
 
 // middleware
 app.use(cors())
@@ -12,8 +15,8 @@ app.use(express.urlencoded({extended: false}))
 
 
 let sessionOptions = session({
-    store: new (require('connect-pg-simple')(session)),
-    secret: "javascript is cool",
+    store: new pgSession({}),
+    secret: process.env.SESSIONPASS,
     resave: false,
     saveUninitialized: false,
     cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true, secure: true}
@@ -28,6 +31,8 @@ app.use(function (req, res, next) {
     res.locals.errors = req.flash("errors")
     res.locals.success = req.flash("success")
     
+    // make user session data available from within view templates
+    res.locals.user = req.session.user
     
     next()
 })
@@ -40,7 +45,4 @@ app.set("view engine", "ejs")
 
 app.use("/", router)
 
-
-app.listen(process.env.PORT, function() {
-    console.log("Server is running on port " + process.env.PORT)
-})
+module.exports = app
