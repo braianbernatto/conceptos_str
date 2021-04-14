@@ -29,3 +29,14 @@ exports.addRubro = function (req, res) {
     console.log(errors)
   })
 }
+
+exports.deleteRubro = function (req, res) {
+  Rubros.deleteRubro(req.params.id, req.params.id2).then(()=>{
+    req.flash("success","¡Eliminado con éxito!")
+    req.session.save(()=> res.redirect(`/`))
+  }).catch((error)=>{
+    req.flash("errors", error)
+    console.log(error)
+    req.session.save(()=> res.redirect(`/`))
+  })
+}

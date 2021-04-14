@@ -33,11 +33,13 @@
     <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
     <%- include("rubros") %> 
     <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
+    <%- include("delete") %> 
+    <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
 
 
     <div class="container animate__animated animate__bounceInUp">
       <div class="div_resize">
-        <label class="btn btn__nivel">+</label> 
+        <label class="btn btn__nivel" id="btn__nivel">-</label> 
         <label for="nivel" class="L1 mainlabels">NIVEL</label>
         <input id="nivel" name="nivel" type="number" class="short noEditable" readonly/>
         <input type="text" id="nivel_descri" class="long noEditable" readonly/>
@@ -54,7 +56,7 @@
         </select>
       </div>
       <div class="div_resize">
-        <label class="btn btn__descuentos">+</label> 
+        <label class="btn btn__descuentos" id="btn__descuentos">x</label>   
         <label class="L3 mainlabels" for="beneficiarios">DESCUENTOS</label>
         <select name="beneficiarios" id="beneficiarios">
           <option class="" id="opt_benef" value="0">-----SELECCIONAR BENEFICIARIO-----</option>

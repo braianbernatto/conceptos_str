@@ -11,6 +11,9 @@ let btnOk = document.querySelector("#boton1");
 let btnCaja = document.querySelector("#boton2");
 let benefSelect = document.querySelector("#beneficiarios");
 let btnRubro = document.querySelector("#btn__rubro");
+let btnDescuentos = document.querySelector("#btn__descuentos");
+let btnEliminar = document.querySelector("#btnEliminar");
+let deleteForm = document.querySelector("#deleteForm");
 let addForm = document.querySelector("#addForm");
 let updateForm = document.querySelector("#updateForm");
 
@@ -43,6 +46,15 @@ export default class rubros {
 
   // events
   events() {
+
+
+    // mostrar ventana de eliminar datos
+    btnDescuentos.addEventListener("click",()=>{
+      this.exportData()
+    })
+
+
+    // mostrar u ocultar crud rubros
     btnRubro.addEventListener("click", () => {
       if (document.querySelector("#addForm").style.display != "flex") {
         document.querySelector("#addForm").style.display = "flex";
@@ -53,6 +65,7 @@ export default class rubros {
       }
     });
 
+    // actions after focus out from rubros
     rubroNro.addEventListener("focusout", () => {
       if (rubroNro.value != rubroAnterior) {
         rubroAnterior = rubroNro.value;
@@ -63,6 +76,8 @@ export default class rubros {
         console.log("rubro es el mismo");
       }
     });
+
+    // auto relleno de tipo programa
     tipo.addEventListener("focusout", this.tipoPrograma);
     programa.addEventListener("focusout", this.tipoPrograma);
 
@@ -79,8 +94,10 @@ export default class rubros {
     btnOk.addEventListener("click", this.copiar);
 
     btnCaja.addEventListener("click", this.cajaChica);
+
     btnCaja.addEventListener("click", this.nivel);
 
+    // enter para tipo programa
     tipo.addEventListener("keyup", function (event) {
       // Number 13 is the "Enter" key on the keyboard
       if (event.keyCode === 13) {
@@ -112,11 +129,11 @@ export default class rubros {
       }
     });
 
+    // actions for cancel button
     document
       .querySelector("#btnCancelar")
       .addEventListener("click", function (event) {
         event.preventDefault();
-        console.log("entro en boton cancelar");
         axios
           .post(`/logout`)
           .then((response) => {})
@@ -124,7 +141,25 @@ export default class rubros {
       });
   }
 
+
+
   // methods
+  exportData(){
+    let rubro = document.getElementById("rubro_nro")    
+    let rubroDescri = document.getElementById("rubro_detalle")
+    let delRubro = document.getElementById("delRubroNro")
+    let delRubroDescri = document.getElementById("delRubroDescri")
+    let cod = ""
+    let cod2 = ""
+    
+    delRubro.value = rubro.value
+    delRubroDescri.value = rubroDescri.value
+    cod = rubro.value
+    cod2 = rubroDescri.options[rubroDescri.selectedIndex].getAttribute("id2")
+    deleteForm.setAttribute("action",`/deleteRubro/${cod}/${cod2}`)
+
+  }
+
   removeRubros() {
     var options = document.querySelectorAll("#rubro_option");
     options.forEach((o) => o.remove());
@@ -155,6 +190,7 @@ export default class rubros {
           option.setAttribute("value", response.data[i].rub_descri);
           option.setAttribute("class", "rubroDetalle");
           option.setAttribute("id", "rubro_option");
+          option.setAttribute("id2",response.data[i].rub_cod2);
           let optionText = document.createTextNode(response.data[i].rub_descri);
           option.appendChild(optionText);
           document.getElementById("rubro_detalle").appendChild(option);

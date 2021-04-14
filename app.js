@@ -20,7 +20,7 @@ let sessionOptions = session({
     cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true}    
 })
 
-app.set('trust proxy', 1) // trust first proxy
+// app.set('trust proxy', 1) // trust first proxy
 app.use(sessionOptions)
 app.use(flash())
 

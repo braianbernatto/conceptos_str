@@ -8,9 +8,9 @@
    -ms-overflow-style: none; /* IE and Edge */
    scrollbar-width: none; 
 }
-/* html{
+html{
   height: 100vh;
-} */
+}
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {
   display: none;
@@ -18,7 +18,7 @@ body::-webkit-scrollbar {
 body, html {
   text-align: center;
   min-width: 375px;
-  min-height: 100vh;
+  min-height: 100%;
   background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
 }
 header {
@@ -134,7 +134,7 @@ button {
   background-color: rgba(255, 255, 255, 0.171);
 
 }
-.addForm, .updateForm{  
+.addForm, .updateForm, .deleteForm{  
   display: flex;
   flex-direction: column;
   min-width: 375px;
@@ -308,11 +308,11 @@ button{
   box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
   padding: 2px 10px;
 }
-.btnGuardar{
+.btnGuardar, .btnModificar, .btnEliminar{
   color: white;
   background-color: rgb(99, 168, 99);
 }
-.btnCancelar{
+.btnCancelar, .btnCancelar2, .btnCancelar3{
   color: white;
   background-color: rgb(136, 36, 36);
 }
