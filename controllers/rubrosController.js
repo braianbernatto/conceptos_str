@@ -30,6 +30,17 @@ exports.addRubro = function (req, res) {
   })
 }
 
+exports.updateRubro = function (req, res) {
+  let rubros = new Rubros(req.body, req.params) 
+  rubros.updateRubro().then(()=>{
+    req.flash("success","¡Modificado con éxito!")
+    req.session.save(()=> res.redirect(`/`))
+  }).catch(function(errors){
+    errors.forEach(error => req.flash("errors", error))
+    req.session.save(()=> res.redirect(`/`))
+  })
+}
+
 exports.deleteRubro = function (req, res) {
   Rubros.deleteRubro(req.params.id, req.params.id2).then(()=>{
     req.flash("success","¡Eliminado con éxito!")

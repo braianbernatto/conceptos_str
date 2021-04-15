@@ -12,6 +12,7 @@ let btnCaja = document.querySelector("#boton2");
 let benefSelect = document.querySelector("#beneficiarios");
 let btnRubro = document.querySelector("#btn__rubro");
 let btnDescuentos = document.querySelector("#btn__descuentos");
+let btnNivel = document.querySelector("#btn__nivel");
 let btnEliminar = document.querySelector("#btnEliminar");
 let deleteForm = document.querySelector("#deleteForm");
 let addForm = document.querySelector("#addForm");
@@ -46,11 +47,34 @@ export default class rubros {
 
   // events
   events() {
+    // prevent from sending form data when pressing Enter key
+    document.querySelector("#addRubroNro").addEventListener("keydown", function (event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault()
+        // Trigger the button element with a click
+        document.getElementById("addRubroDescri").focus()
+      }
+    })
+    document.querySelector("#addRubroDescri").addEventListener("keydown", function (event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault()
+        // Trigger the button element with a click
+        document.getElementById("addRubroNivel").focus()
+      }
+    })
 
+    // mostrar ventana de actualizar datos
+    btnNivel.addEventListener("click",()=>{
+      this.exportData("update")
+    })
 
     // mostrar ventana de eliminar datos
     btnDescuentos.addEventListener("click",()=>{
-      this.exportData()
+      this.exportData("del")
     })
 
 
@@ -139,24 +163,53 @@ export default class rubros {
           .then((response) => {})
           .catch(() => {});
       });
+
+  // 
+  document
+  .querySelector("#btnCancelar2")
+  .addEventListener("click", function (event) {
+    event.preventDefault();    
+  });
+  document
+  .querySelector("#btnCancelar3")
+  .addEventListener("click", function (event) {
+    event.preventDefault();    
+  });
+
+
+
+  // end of events
   }
+  
 
 
 
   // methods
-  exportData(){
+  exportData(action){
     let rubro = document.getElementById("rubro_nro")    
     let rubroDescri = document.getElementById("rubro_detalle")
-    let delRubro = document.getElementById("delRubroNro")
-    let delRubroDescri = document.getElementById("delRubroDescri")
+    let nivel = document.getElementById("nivel")
+
+    let exRubro = document.getElementById(`${action}RubroNro`)
+    let exRubroDescri = document.getElementById(`${action}RubroDescri`)
+    let exNivel = ""
     let cod = ""
     let cod2 = ""
     
-    delRubro.value = rubro.value
-    delRubroDescri.value = rubroDescri.value
+    exRubro.value = rubro.value
+    exRubroDescri.value = rubroDescri.value
+    
     cod = rubro.value
     cod2 = rubroDescri.options[rubroDescri.selectedIndex].getAttribute("id2")
-    deleteForm.setAttribute("action",`/deleteRubro/${cod}/${cod2}`)
+    
+    if (action == "update") {
+      exNivel = document.getElementById(`${action}NivelRubro`)
+      exNivel.value = nivel.value
+      updateForm.setAttribute("action",`/updateRubro/${cod}/${cod2}`)
+    }
+    if (action == "del") {
+      deleteForm.setAttribute("action",`/deleteRubro/${cod}/${cod2}`)
+    }
 
   }
 

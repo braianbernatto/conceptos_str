@@ -11,6 +11,7 @@ router.post("/nivelById", RubrosController.nivel)
 router.post("/tipoPrograma", TipoProgramaController.getTipoPrograma)
 router.post("/addRubro", RubrosController.addRubro)
 router.post("/deleteRubro/:id/:id2", RubrosController.deleteRubro)
+router.post("/updateRubro/:id/:id2", RubrosController.updateRubro)
 
 // user related routes
 router.post("/logout", UserController.logOut)
