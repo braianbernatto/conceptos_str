@@ -68,14 +68,24 @@ Rubros.prototype.validate = function (action) {
   }
 };
 
-Rubros.prototype.isUnique = function () {
+Rubros.prototype.isUnique = function (action) {
   if (this.data.val) {
     return new Promise(async (resolve, reject) => {
       try {
-        let count = await pool.query(
+        let count = ""
+        if(action == "add"){
+          count = await pool.query(
           `select count(rub_cod) from rubros where rub_cod = ${this.data.rubroNro} and rub_descri =
           '${this.data.rubroDescri}'`
           );
+        }
+
+        if(action == "update"){
+          count = await pool.query(
+          `select count(rub_cod) from rubros where rub_cod = ${this.data.rubroNro} and rub_descri =
+          '${this.data.rubroDescri}' and nivel_cod =  ${this.data.rubroNivel}`
+          );
+        }
           if (count[0].count != "0") {
             this.errors.push("Ya existe esta descripción en el mismo rubro");
             resolve(false);
@@ -108,7 +118,7 @@ Rubros.prototype.isUnique = function () {
         // first clean and validate data
         this.cleanUp("add");
         this.validate("add");
-        await this.isUnique();
+        await this.isUnique("add");
         // only if there are no errors proceedo to save into the database
         if (!this.errors.length) {
             try {
@@ -133,7 +143,7 @@ Rubros.prototype.updateRubro = function () {
     // first clean and validate data
     this.cleanUp("update");
     this.validate("update");
-    await this.isUnique();
+    await this.isUnique("update");
 
     // only if there are no errors proceedo to save into the database
     if (!this.errors.length) {

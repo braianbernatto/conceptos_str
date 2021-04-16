@@ -10,15 +10,19 @@ let rubroNro = document.querySelector("#rubro_nro");
 let btnOk = document.querySelector("#boton1");
 let btnCaja = document.querySelector("#boton2");
 let benefSelect = document.querySelector("#beneficiarios");
-let btnRubro = document.querySelector("#btn__rubro");
-let btnDescuentos = document.querySelector("#btn__descuentos");
 let btnNivel = document.querySelector("#btn__nivel");
-let btnEliminar = document.querySelector("#btnEliminar");
 let deleteForm = document.querySelector("#deleteForm");
-let addForm = document.querySelector("#addForm");
 let updateForm = document.querySelector("#updateForm");
+let btnMenu = document.querySelector("#menu");
+let btnAdd = document.querySelector(".btn_add");
+let btnUpdate = document.querySelector(".btn_update");
+let btnDelete = document.querySelector(".btn_delete");
+let btnCancelAdd = document.querySelector("#btnCancelar");
+let btnCancelUpdate = document.querySelector("#btnCancelar2");
+let btnCancelDelete = document.querySelector("#btnCancelar3");
 
 let rubroAnterior = "";
+let buttonFlag = 0;
 
 final.value = "";
 nivel.value = "";
@@ -67,38 +71,57 @@ export default class rubros {
       }
     })
 
-    // mostrar ventana de actualizar datos
-    btnNivel.addEventListener("click",()=>{
-      this.exportData("update")
-    })
 
     // mostrar ventana de eliminar datos
-    btnDescuentos.addEventListener("click",()=>{
-      this.exportData("del")
-    })
-
-
-    // mostrar u ocultar crud rubros
-    btnRubro.addEventListener("click", () => {
-      if (document.querySelector("#addForm").style.display != "flex") {
-        document.querySelector("#addForm").style.display = "flex";
-        document.querySelector("#updateForm").style.display = "flex";
-      } else {
-        document.querySelector("#addForm").style.display = "none";
-        document.querySelector("#updateForm").style.display = "none";
-      }
+    
+    
+    
+    // mostrar u ocultar add rubros
+    btnAdd.addEventListener("click", () => {
+      document.querySelector("#addForm").style.display = "flex";
+      btnMenu.click()
     });
+    btnCancelAdd.addEventListener("click", () => {
+      document.querySelector("#addForm").style.display = "none";
+    });
+    
+    // mostrar u ocultar update rubros
+    btnUpdate.addEventListener("click", () => {
+      this.exportData("update")
+      document.querySelector("#updateForm").style.display = "flex";
+      btnMenu.click()
+    });
+    btnCancelUpdate.addEventListener("click", () => {
+      document.querySelector("#updateForm").style.display = "none";
+    });
+    
+    // mostrar u ocultar delete rubros
+    btnDelete.addEventListener("click", () => {
+      this.exportData("del")
+      document.querySelector("#deleteForm").style.display = "flex";
+      btnMenu.click()
+    });
+    btnCancelDelete.addEventListener("click", () => {
+      document.querySelector("#deleteForm").style.display = "none";
+    });
+
+
 
     // actions after focus out from rubros
     rubroNro.addEventListener("focusout", () => {
       if (rubroNro.value != rubroAnterior) {
         rubroAnterior = rubroNro.value;
-        console.log("rubro cambió");
+        // console.log("rubro cambió");
         this.removeRubros();
         this.injectHTML();
       } else {
-        console.log("rubro es el mismo");
+        // console.log("rubro es el mismo");
       }
+    });
+
+    // actions after focus out from rubros
+    document.querySelector("#rubro_detalle").addEventListener("change",() => {
+      this.selectChanged()
     });
 
     // auto relleno de tipo programa
@@ -154,17 +177,22 @@ export default class rubros {
     });
 
     // actions for cancel button
-    document
-      .querySelector("#btnCancelar")
-      .addEventListener("click", function (event) {
-        event.preventDefault();
-        axios
-          .post(`/logout`)
-          .then((response) => {})
-          .catch(() => {});
-      });
+    // document
+    //   .querySelector("#btnCancelar")
+    //   .addEventListener("click", function (event) {
+    //     event.preventDefault();
+    //     axios
+    //       .post(`/logout`)
+    //       .then((response) => {})
+    //       .catch(() => {});
+    //   });
 
   // 
+  document
+  .querySelector("#btnCancelar")
+  .addEventListener("click", function (event) {
+    event.preventDefault();    
+  });
   document
   .querySelector("#btnCancelar2")
   .addEventListener("click", function (event) {
@@ -176,16 +204,46 @@ export default class rubros {
     event.preventDefault();    
   });
 
+// menu buttons action
+document.querySelector("#menu").addEventListener("click", ()=> {
+  this.expandMenu()  
+});
+
+// end of events
+}
 
 
-  // end of events
-  }
+
+
+// methods
+expandMenu(){
   
+  if (buttonFlag == 0) {
+    document.querySelector("#btn_add").style.display = "flex";
+    document.querySelector("#btn_update").style.display = "flex";
+    document.querySelector("#btn_delete").style.display = "flex"
+    
+    setTimeout(() => {
+      document.querySelector("#btn_add").style.transform = "translate(-40px , -30px)"
+      document.querySelector("#btn_update").style.transform = "translateX(-80px)"
+      document.querySelector("#btn_delete").style.transform = "translate(-40px , 30px)"
+    }, 50);
+      buttonFlag = 1
+    }else{
+      document.querySelector("#btn_add").style.transform = "translate(0)"
+      document.querySelector("#btn_update").style.transform = "translate(0)"
+      document.querySelector("#btn_delete").style.transform = "translate(0)"
+      setTimeout(() => {
+      document.querySelector("#btn_add").style.display = "none";
+      document.querySelector("#btn_update").style.display = "none";
+      document.querySelector("#btn_delete").style.display = "none"
+      }, 200);
+      buttonFlag = 0      
+    }
+  }
 
-
-
-  // methods
   exportData(action){
+
     let rubro = document.getElementById("rubro_nro")    
     let rubroDescri = document.getElementById("rubro_detalle")
     let nivel = document.getElementById("nivel")
@@ -233,6 +291,19 @@ export default class rubros {
     }
   }
 
+  selectChanged(){
+    let oldNivel = document.getElementById("nivel")
+    let rubroDescri = document.getElementById("rubro_detalle");
+    let nivel = rubroDescri.options[rubroDescri.selectedIndex].getAttribute("nivel")
+    if (oldNivel.value != nivel) {
+      // console.log("nivel cambió");
+      oldNivel.value = nivel
+      this.nivel()
+    } else {
+      // console.log("nivel es el mismo");
+    }
+  }  
+
   injectHTML() {
     axios
       .post(`/rubrosByNro`, { nro: document.querySelector("#rubro_nro").value })
@@ -242,6 +313,7 @@ export default class rubros {
           let option = document.createElement("option");
           option.setAttribute("value", response.data[i].rub_descri);
           option.setAttribute("class", "rubroDetalle");
+          option.setAttribute("nivel", response.data[i].nivel_cod);
           option.setAttribute("id", "rubro_option");
           option.setAttribute("id2",response.data[i].rub_cod2);
           let optionText = document.createTextNode(response.data[i].rub_descri);

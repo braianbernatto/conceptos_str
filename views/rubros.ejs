@@ -1,6 +1,6 @@
 <div class="wrap">
     <!-- ADD -->
-      <form action="/addRubro" method="POST" class="addForm animate__animated animate__bounceInDown" id="addForm">
+      <form action="/addRubro" method="POST" stage="off" class="addForm animate__animated animate__bounceInDown" id="addForm">
         <div class="div_resize">
           <label id="" for="addRubroNro" class="titles">AGREGAR RUBRO</label>
           <label id="" for="addRubroNro" class="L2 mainlabels">RUBRO</label>
@@ -16,8 +16,9 @@
           <button for="" class="btnCancelar" id="btnCancelar">Cancelar</button>
         </div>
       </form>  
+
       <!-- UPDATE -->
-      <form action="/updateRubro" method="POST" class="updateForm animate__animated animate__bounceInDown" id="updateForm">
+      <form action="/updateRubro" method="POST" stage="off" class="updateForm animate__animated animate__bounceInDown" id="updateForm">
         <div class="div_resize">
           <label id="" for="updateRubroNro" class="titles">MODIFICAR RUBRO</label>
           <label id="rubro_btn2" for="updateRubroNro" class="L2 mainlabels">RUBRO</label>
@@ -33,6 +34,19 @@
           <button for="" class="btnCancelar2" id="btnCancelar2">Cancelar</button>
         </div>
       </form> 
-      
+
+      <!-- DELETE -->
+      <form action="#" method="POST" stage="off" class="deleteForm animate__animated animate__bounceInDown" id="deleteForm">
+        <div class="div_resize">
+          <label id="" for="delRubroNro" class="titles">¿SEGURO QUE DESEA ELIMINAR?</label>
+          <label id="" for="delRubroNro" class="L2 mainlabels">RUBRO</label>
+          <input name="delRubroNro" id="delRubroNro" type="number" class="short" readonly/>
+          <input name="delRubroDescri" type="text" id="delRubroDescri" class="long" readonly/>
+        </div>      
+        <div class="btnActions">
+          <button for="" class="btnEliminar" id="btnEliminar">Eliminar</button>
+          <button for="" class="btnCancelar3" id="btnCancelar3">Cancelar</button>
+        </div>
+      </form> 
       
     </div>
