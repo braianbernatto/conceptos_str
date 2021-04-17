@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?96366964');
-  src: url('../font/fontello.eot?96366964#iefix') format('embedded-opentype'),
-       url('../font/fontello.woff2?96366964') format('woff2'),
-       url('../font/fontello.woff?96366964') format('woff'),
-       url('../font/fontello.ttf?96366964') format('truetype'),
-       url('../font/fontello.svg?96366964#fontello') format('svg');
+  src: url('../font/fontello.eot?78896814');
+  src: url('../font/fontello.eot?78896814#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff2?78896814') format('woff2'),
+       url('../font/fontello.woff?78896814') format('woff'),
+       url('../font/fontello.ttf?78896814') format('truetype'),
+       url('../font/fontello.svg?78896814#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?96366964#fontello') format('svg');
+    src: url('../font/fontello.svg?78896814#fontello') format('svg');
   }
 }
 */
@@ -55,6 +55,22 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-ok:before { content: '\e800'; } /* '' */
-.icon-box:before { content: '\e801'; } /* '' */
-.icon-box-1:before { content: '\f187'; } /* '' */
+.icon-arrows-cw:before { content: '\e800'; } /* '' */
+.icon-trash:before { content: '\e801'; } /* '' */
+.icon-trash-1:before { content: '\e802'; } /* '' */
+.icon-plus:before { content: '\e803'; } /* '' */
+.icon-ok:before { content: '\e804'; } /* '' */
+.icon-box:before { content: '\e805'; } /* '' */
+.icon-cog-outline:before { content: '\e806'; } /* '' */
+.icon-equalizer:before { content: '\e808'; } /* '' */
+.icon-wrench-1:before { content: '\e809'; } /* '' */
+.icon-cog:before { content: '\e80a'; } /* '' */
+.icon-layout:before { content: '\e80b'; } /* '' */
+.icon-dot-3:before { content: '\e80c'; } /* '' */
+.icon-calendar-alt:before { content: '\e80d'; } /* '' */
+.icon-cog-alt:before { content: '\e80e'; } /* '' */
+.icon-left-open:before { content: '\e80f'; } /* '' */
+.icon-off:before { content: '\e810'; } /* '' */
+.icon-spin3:before { content: '\e832'; } /* '' */
+.icon-trash-2:before { content: '\f083'; } /* '' */
+.icon-sliders:before { content: '\f1de'; } /* '' */

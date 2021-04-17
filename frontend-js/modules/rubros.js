@@ -20,6 +20,8 @@ let btnDelete = document.querySelector(".btn_delete");
 let btnCancelAdd = document.querySelector("#btnCancelar");
 let btnCancelUpdate = document.querySelector("#btnCancelar2");
 let btnCancelDelete = document.querySelector("#btnCancelar3");
+let rubroLabel = document.querySelector("#rubro_btn");
+
 
 let rubroAnterior = "";
 let buttonFlag = 0;
@@ -51,6 +53,20 @@ export default class rubros {
 
   // events
   events() {
+    rubroLabel.addEventListener("mouseover",()=>{
+      if (btnMenu.style.display != "flex") {
+        btnMenu.style.display = "flex";
+        setTimeout(() => {
+         if (btnUpdate.style.display != "flex") {
+          btnMenu.style.display = "none";
+         }
+        }, 3000);
+      }
+    })
+    // rubroLabel.addEventListener("mouseout",()=>{
+      
+    // })
+
     // prevent from sending form data when pressing Enter key
     document.querySelector("#addRubroNro").addEventListener("keydown", function (event) {
       // Number 13 is the "Enter" key on the keyboard
@@ -224,9 +240,9 @@ expandMenu(){
     document.querySelector("#btn_delete").style.display = "flex"
     
     setTimeout(() => {
-      document.querySelector("#btn_add").style.transform = "translate(-40px , -30px)"
-      document.querySelector("#btn_update").style.transform = "translateX(-80px)"
-      document.querySelector("#btn_delete").style.transform = "translate(-40px , 30px)"
+      document.querySelector("#btn_add").style.transform = "translate(-45px , -30px)"
+      document.querySelector("#btn_update").style.transform = "translateX(-85px)"
+      document.querySelector("#btn_delete").style.transform = "translate(-45px , 30px)"
     }, 50);
       buttonFlag = 1
     }else{
@@ -237,6 +253,7 @@ expandMenu(){
       document.querySelector("#btn_add").style.display = "none";
       document.querySelector("#btn_update").style.display = "none";
       document.querySelector("#btn_delete").style.display = "none"
+      btnMenu.style.display = "none";
       }, 200);
       buttonFlag = 0      
     }
