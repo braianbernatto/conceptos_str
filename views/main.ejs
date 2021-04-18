@@ -20,33 +20,35 @@
   </head>
   <body>
     <header class="">
-      <img  class="logo animate__animated animate__bounceInUp" src="/img/logo.png" width="100" />
-      <div class="div_h1">
-        <h1 class="animate__animated animate__bounceInUp">
+      <img  class="logo animate__animated animate__bounceInUp" src="/img/logo.png" width="100" />      
+      <div class="glass_container animate__animated animate__bounceInUp"><div class="glass"><div class="div_h1">
+        <h1 class="">
           STR <br />
           CONCEPTOS
         </h1>
-      </div>
+      </div></div></div>
     </header>
-    <div class="div_resize"><%= views %> </div>
     <%- include("includes/flash") %>  
     <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
     <%- include("rubros") %> 
     <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
-
-
     <div class="container animate__animated animate__bounceInUp">
       <div class="div_resize">
-        <!-- <label class="menu btn__nivel" id="btn__nivel">+</label>  -->
-        <label for="nivel" class="L1 mainlabels">NIVEL</label>
+        <!-- menu -->
+        <button class="menu mainMenu icon-dot-3" id="menu_nivel"></button>
+        <button class="menu menu_items btn_add icon-plus" id="btn_nivel_add"></button> 
+        <button class="menu menu_items btn_update icon-arrows-cw" id="btn_nivel_update"></button> 
+        <button class="menu menu_items btn_delete icon-trash-2" id="btn_nivel_delete"></button>
+        <!--  -->
+        <label id="nivel_btn" for="nivel" class="L1 mainlabels">NIVEL</label>
         <input id="nivel" name="nivel" type="number" class="short noEditable" readonly/>
         <input type="text" id="nivel_descri" class="long noEditable" readonly/>
       </div>
       <div class="div_resize">
-        <button class="menu mainMenu icon-dot-3" id="menu"></button>
-        <button class="menu menu_items btn_add icon-plus" id="btn_add"></button> 
-        <button class="menu menu_items btn_update icon-arrows-cw" id="btn_update"></button> 
-        <button class="menu menu_items btn_delete icon-trash-2" id="btn_delete"></button> 
+        <button class="menu mainMenu icon-dot-3" id="menu_rubro"></button>
+        <button class="menu menu_items btn_add icon-plus" id="btn_rubro_add"></button> 
+        <button class="menu menu_items btn_update icon-arrows-cw" id="btn_rubro_update"></button> 
+        <button class="menu menu_items btn_delete icon-trash-2" id="btn_rubro_delete"></button> 
         <div id="rubro_btn" for="rubro_nro" class="L2 mainlabels">RUBRO</div>
         <input name="rubro_nro" id="rubro_nro" type="number" class="short rubro_nro" onclick="this.select()"/>
         <select name="rubro_detalle" id="rubro_detalle">
@@ -57,8 +59,13 @@
         </select>
       </div>
       <div class="div_resize">
-        <!-- <label class="menu btn__descuentos" id="btn__descuentos">+</label>    -->
-        <label class="L3 mainlabels" for="beneficiarios">DESCUENTOS</label>
+        <!-- menu -->
+        <button class="menu mainMenu icon-dot-3" id="menu_descuento"></button>
+        <button class="menu menu_items btn_add icon-plus" id="btn_desc_add"></button> 
+        <button class="menu menu_items btn_update icon-arrows-cw" id="btn_desc_update"></button> 
+        <button class="menu menu_items btn_delete icon-trash-2" id="btn_desc_delete"></button>
+        <!--  -->
+        <label id="descuento_btn" class="L3 mainlabels" for="beneficiarios">DESCUENTOS</label>
         <select name="beneficiarios" id="beneficiarios">
           <option class="" id="opt_benef" value="0">-----SELECCIONAR BENEFICIARIO-----</option>
           <% benef.forEach(function (benef) { %>
@@ -67,8 +74,13 @@
           </select>
         </div>
         <div class="div_resize">
-          <!-- <label class="menu btn__mes">+</label>  -->
-          <label class="L4 mainlabels" for="mes">MES</label>
+          <!-- menu -->
+        <button class="menu mainMenu icon-dot-3" id="menu_mes"></button>
+        <button class="menu menu_items btn_add icon-plus" id="btn_mes_add"></button> 
+        <button class="menu menu_items btn_update icon-arrows-cw" id="btn_mes_update"></button> 
+        <button class="menu menu_items btn_delete icon-trash-2" id="btn_mes_delete"></button>
+        <!--  -->
+        <label id="mes_btn" class="L4 mainlabels" for="mes">MES</label>
         <select name="mes" id="mes" class="">
           <% mes.forEach(function (mes) { %>
             <option class="" value="<%= mes.mes_descri %>"><%= mes.mes_descri %></option>
@@ -76,8 +88,13 @@
           </select>
         </div>
         <div class="div_resize">
-          <!-- <label class="menu btn__tipo">+</label>  -->
-          <label class="L6 mainlabels" for="tipo">TIPO</label>
+        <!-- menu -->
+        <button class="menu mainMenu icon-dot-3" id="menu_tipo"></button>
+        <button class="menu menu_items btn_add icon-plus" id="btn_tipo_add"></button> 
+        <button class="menu menu_items btn_update icon-arrows-cw" id="btn_tipo_update"></button> 
+        <button class="menu menu_items btn_delete icon-trash-2" id="btn_tipo_delete"></button>
+        <!--  -->
+          <label id="tipo_btn" class="L6 mainlabels" for="tipo">TIPO</label>
           <input type="text" id="tipo" class="short" value="" onclick="this.select()"/>
           <input type="text" id="programa" class="short" value="" onclick="this.select()"/>
           <input
