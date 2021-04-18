@@ -10,14 +10,6 @@ let rubroNro = document.querySelector("#rubro_nro");
 let btnOk = document.querySelector("#boton1");
 let btnCaja = document.querySelector("#boton2");
 let benefSelect = document.querySelector("#beneficiarios");
-let deleteForm = document.querySelector("#deleteForm");
-let updateForm = document.querySelector("#updateForm");
-let btnAdd = document.querySelector("#btn_add");
-let btnUpdate = document.querySelector("#btn_update");
-let btnDelete = document.querySelector("#btn_delete");
-let btnCancelAdd = document.querySelector("#btnCancelar");
-let btnCancelUpdate = document.querySelector("#btnCancelar2");
-let btnCancelDelete = document.querySelector("#btnCancelar3");
 // btn menu
 let btnRubro = document.querySelector("#menu_rubro");
 let btnNivel = document.querySelector("#menu_nivel");
@@ -30,21 +22,106 @@ let nivelLabel = document.querySelector("#nivel_btn");
 let descuentoLabel = document.querySelector("#descuento_btn");
 let tipoLabel = document.querySelector("#tipo_btn");
 let mesLabel = document.querySelector("#mes_btn");
-// btn flags
-let a = 0
-let b = 0
-let c = 0
-let d = 0
-let e = 0
 
 let rubroAnterior = "";
 let buttonFlag = 0;
 let menu = "";
-let menuItem = "";
 
 final.value = "";
 nivel.value = "";
 nivelDescri.value = "";
+
+let rubroCrud = {
+  menu: "#menu_rubro",
+  addForm: "#addFormRubro",
+  updateForm: "#updateFormRubro",
+  deleteForm: "#deleteFormRubro",
+  btnAdd: "#btn_rubro_add",
+  btnUpdate: "#btn_rubro_update",
+  btnDelete: "#btn_rubro_delete",
+  btnAddSave: "#btnSaveRubro",
+  btnAddCancel: "#btnCancelRubro",
+  btnUpdateSave: "#btnSaveRubroUpdate",
+  btnUpdateCancel: "#btnCancelRubroUpdate",
+  btnDelSave: "#btnSaveRubroDelete",
+  btnDelCancel: "#btnCancelRubroDelete",
+};
+let rubroCrud2 = {
+  menu: "#menu_rubro",
+  addForm: "#addForm",
+  updateForm: "#updateForm",
+  deleteForm: "#deleteForm",
+  btnAdd: "#btn_rubro_add",
+  btnUpdate: "#btn_rubro_update",
+  btnDelete: "#btn_rubro_delete",
+  btnAddSave: "#btnSaveRubro",
+  btnAddCancel: "#btnCancelRubro",
+  btnUpdateSave: "#btnSaveRubroUpdate",
+  btnUpdateCancel: "#btnCancelRubroUpdate",
+  btnDelSave: "#btnSaveRubroDelete",
+  btnDelCancel: "#btnCancelRubroDelete",
+};
+let nivelCrud = {
+  menu: "#menu_nivel",
+  addForm: "#",
+  updateForm: "#",
+  deleteForm: "#",
+  btnAdd: "#btn_nivel_add",
+  btnUpdate: "#btn_nivel_update",
+  btnDelete: "#btn_nivel_delete",
+  btnAddSave: "#",
+  btnAddCancel: "#",
+  btnUpdateSave: "#",
+  btnUpdateCancel: "#",
+  btnDelSave: "#",
+  btnDelCancel: "#",
+};
+let descCrud = {
+  menu: "#menu_descuento",
+  addForm: "#",
+  updateForm: "#",
+  deleteForm: "#",
+  btnAdd: "#btn_desc_add",
+  btnUpdate: "#btn_desc_update",
+  btnDelete: "#btn_desc_delete",
+  btnAddSave: "#",
+  btnAddCancel: "#",
+  btnUpdateSave: "#",
+  btnUpdateCancel: "#",
+  btnDelSave: "#",
+  btnDelCancel: "#",
+};
+let tipoCrud = {
+  menu: "#menu_tipo",
+  addForm: "#",
+  updateForm: "#",
+  deleteForm: "#",
+  btnAdd: "#btn_tipo_add",
+  btnUpdate: "#btn_tipo_update",
+  btnDelete: "#btn_tipo_delete",
+  btnAddSave: "#",
+  btnAddCancel: "#",
+  btnUpdateSave: "#",
+  btnUpdateCancel: "#",
+  btnDelSave: "#",
+  btnDelCancel: "#",
+};
+let mesCrud = {
+  menu: "#menu_mes",
+  addForm: "#",
+  updateForm: "#",
+  deleteForm: "#",
+  btnAdd: "#btn_mes_add",
+  btnUpdate: "#btn_mes_update",
+  btnDelete: "#btn_mes_delete",
+  btnAddSave: "#",
+  btnAddCancel: "#",
+  btnUpdateSave: "#",
+  btnUpdateCancel: "#",
+  btnDelSave: "#",
+  btnDelCancel: "#",
+};
+
 document.querySelector("#rubro_nro").value = "";
 document.querySelector("#rubro_detalle").value = 0;
 benefSelect.value = 0;
@@ -65,6 +142,7 @@ setTimeout(() => {
 export default class rubros {
   constructor() {
     this.events();
+    this.preventEnterSend([rubroCrud]);  
   }
 
   // events
@@ -172,158 +250,159 @@ export default class rubros {
     //   });
 
     //
-    document
-      .querySelector("#btnCancelar")
-      .addEventListener("click", function (event) {
-        event.preventDefault();
-      });
-    document
-      .querySelector("#btnCancelar2")
-      .addEventListener("click", function (event) {
-        event.preventDefault();
-      });
-    document
-      .querySelector("#btnCancelar3")
-      .addEventListener("click", function (event) {
-        event.preventDefault();
-      });
 
     // menu buttons action
     btnRubro.addEventListener("click", () => {
-      menu = "#menu_rubro";
-      menuItem = "#btn_rubro_";
-      this.expandMenu(menu, menuItem);
+      this.expandMenu(rubroCrud);
     });
     btnNivel.addEventListener("click", () => {
-      menu = "#menu_nivel";
-      menuItem = "#btn_nivel_";
-      this.expandMenu(menu, menuItem);
+      this.expandMenu(nivelCrud);
     });
     btnDesc.addEventListener("click", () => {
-      menu = "#menu_descuento";
-      menuItem = "#btn_desc_";
-      this.expandMenu(menu, menuItem);
+      this.expandMenu(descCrud);
     });
     btnTipo.addEventListener("click", () => {
-      menu = "#menu_tipo";
-      menuItem = "#btn_tipo_";
-      this.expandMenu(menu, menuItem);
+      this.expandMenu(tipoCrud);
     });
     btnMes.addEventListener("click", () => {
-      menu = "#menu_mes";
-      menuItem = "#btn_mes_";
-      this.expandMenu(menu, menuItem);
+      this.expandMenu(mesCrud);
     });
 
     // menu hover options
     rubroLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu()
+      this.closeAllMenu();
       this.showMenu("rubro");
     });
-    
+
     nivelLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu()
+      this.closeAllMenu();
       this.showMenu("nivel");
     });
-    
+
     descuentoLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu()
+      this.closeAllMenu();
       this.showMenu("descuento");
     });
-    
+
     tipoLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu()
+      this.closeAllMenu();
       this.showMenu("tipo");
     });
-    
+
     mesLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu()
+      this.closeAllMenu();
       this.showMenu("mes");
     });
 
     // mostrar u ocultar add rubros
-    // btnAdd.addEventListener("click", () => {
-    //   document.querySelector("#addForm").style.display = "flex";
-    //   btnMenu.click()
-    //   document.querySelector("#addRubroNro").focus()
+    document.querySelector(rubroCrud.btnAdd).addEventListener("click", () => {
+      document.querySelector(rubroCrud.addForm).style.display = "flex";
+      document.querySelector(rubroCrud.menu).click();
+      document.querySelector("#addRubroNro").focus();
+      
+    });
+    document
+      .querySelector(rubroCrud.btnAddCancel)
+      .addEventListener("click", () => {
+        document.querySelector(rubroCrud.addForm).style.display = "none";
+      });
 
-    // });
-    // btnCancelAdd.addEventListener("click", () => {
-    //   document.querySelector("#addForm").style.display = "none";
-    // });
+    // mostrar u ocultar update rubros
+    document
+      .querySelector(rubroCrud.btnUpdate)
+      .addEventListener("click", () => {
+        if (rubroNro.value.trim() != "") {
+          this.exportData("update",rubroCrud.updateForm);
+          document.querySelector(rubroCrud.updateForm).style.display = "flex";
+          document.querySelector(rubroCrud.menu).click();
+        } else {
+          rubroNro.classList.add("errorShadow");
+          rubroNro.focus();
+          setTimeout(() => {
+            rubroNro.classList.remove("errorShadow");
+          }, 3000);
+        }
+      });
+    document
+      .querySelector(rubroCrud.btnUpdateCancel)
+      .addEventListener("click", () => {
+        document.querySelector(rubroCrud.updateForm).style.display = "none";
+      });
 
-    // // mostrar u ocultar update rubros
-    // btnUpdate.addEventListener("click", () => {
-    //   if (rubroNro.value.trim() != "") {
-    //     this.exportData("update")
-    //   document.querySelector("#updateForm").style.display = "flex";
-    //   btnMenu.click()
-    //   }else{
-    //     rubroNro.classList.add("errorShadow")
-    //     rubroNro.focus()
-    //     setTimeout(() => {
-    //       rubroNro.classList.remove("errorShadow")
-    //     }, 3000);
-    //   }
-    // });
-    // btnCancelUpdate.addEventListener("click", () => {
-    //   document.querySelector("#updateForm").style.display = "none";
-    // });
-
-    // // mostrar u ocultar delete rubros
-    // btnDelete.addEventListener("click", () => {
-    //   if (rubroNro.value.trim() != "") {
-    //   this.exportData("del")
-    //   document.querySelector("#deleteForm").style.display = "flex";
-    //   btnMenu.click()
-    //   }else{
-    //     rubroNro.classList.add("errorShadow")
-    //     rubroNro.focus()
-    //     setTimeout(() => {
-    //       rubroNro.classList.remove("errorShadow")
-    //     }, 3000);
-    //   }
-    // });
-    // btnCancelDelete.addEventListener("click", () => {
-    //   document.querySelector("#deleteForm").style.display = "none";
-    // });
+    // mostrar u ocultar delete rubros
+    document
+      .querySelector(rubroCrud.btnDelete)
+      .addEventListener("click", () => {
+        if (rubroNro.value.trim() != "") {
+          this.exportData("del", rubroCrud.deleteForm);
+          document.querySelector(rubroCrud.deleteForm).style.display = "flex";
+          document.querySelector(rubroCrud.menu).click();
+        } else {
+          rubroNro.classList.add("errorShadow");
+          rubroNro.focus();
+          setTimeout(() => {
+            rubroNro.classList.remove("errorShadow");
+          }, 3000);
+        }
+      });
+    document
+      .querySelector(rubroCrud.btnDelCancel)
+      .addEventListener("click", () => {
+        document.querySelector(rubroCrud.deleteForm).style.display = "none";
+      });
 
     // end of events
   }
 
   // methods
+  preventEnterSend(buttons) {
+    buttons.forEach((button) => {
+      document
+        .querySelector(button.btnAddCancel)
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+        });
+      document
+        .querySelector(button.btnUpdateCancel)
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+        });
+      document
+        .querySelector(button.btnDelCancel)
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+        });
+    });
+  }
+
   closeAllMenu() {
-    buttonFlag = 0
+    buttonFlag = 0;
     for (let i = 0; i < document.querySelectorAll(".menu").length; i++) {
       document.querySelectorAll(".menu")[i].style.display = "none";
     }
   }
-  
+
   showMenu(type) {
+    let menu;
     switch (type) {
       case "rubro":
-        menu = "#menu_rubro";
-        menuItem = "#btn_rubro_";                
+        menu = rubroCrud.menu;
         break;
 
       case "nivel":
-        menu = "#menu_nivel";
-        menuItem = "#btn_nivel_";
+        menu = nivelCrud.menu;
         break;
 
       case "descuento":
-        menu = "#menu_descuento";
-        menuItem = "#btn_desc_";
+        menu = descCrud.menu;
         break;
 
       case "tipo":
-        menu = "#menu_tipo";
-        menuItem = "#btn_tipo_";
+        menu = tipoCrud.menu;
         break;
 
       case "mes":
-        menu = "#menu_mes";
-        menuItem = "#btn_mes_";
+        menu = mesCrud.menu;
         break;
     }
 
@@ -338,45 +417,47 @@ export default class rubros {
     }
   }
 
-  expandMenu(menu, btn) {
+  expandMenu(menu) {
     if (buttonFlag == 0) {
-      document.querySelector(btn + "add").style.display = "flex";
-      document.querySelector(btn + "update").style.display = "flex";
-      document.querySelector(btn + "delete").style.display = "flex";
-      
-      document.querySelector(btn + "add").style.transform = "translate(0)";
-      document.querySelector(btn + "update").style.transform = "translate(0)";
-      document.querySelector(btn + "delete").style.transform = "translate(0)";
+      document.querySelector(menu.btnAdd).style.display = "flex";
+      document.querySelector(menu.btnUpdate).style.display = "flex";
+      document.querySelector(menu.btnDelete).style.display = "flex";
+
+      document.querySelector(menu.btnAdd).style.transform = "translate(0)";
+      document.querySelector(menu.btnUpdate).style.transform = "translate(0)";
+      document.querySelector(menu.btnDelete).style.transform = "translate(0)";
 
       setTimeout(() => {
-        document.querySelector(btn + "add").style.transform =
+        document.querySelector(menu.btnAdd).style.transform =
           "translate(-40px , -30px)";
-        document.querySelector(btn + "update").style.transform =
+        document.querySelector(menu.btnUpdate).style.transform =
           "translateX(-80px)";
-        document.querySelector(btn + "delete").style.transform =
+        document.querySelector(menu.btnDelete).style.transform =
           "translate(-40px , 30px)";
       }, 50);
       buttonFlag = 1;
     } else {
-      document.querySelector(btn + "add").style.transform = "translate(0)";
-      document.querySelector(btn + "update").style.transform = "translate(0)";
-      document.querySelector(btn + "delete").style.transform = "translate(0)";
+      document.querySelector(menu.btnAdd).style.transform = "translate(0)";
+      document.querySelector(menu.btnUpdate).style.transform = "translate(0)";
+      document.querySelector(menu.btnDelete).style.transform = "translate(0)";
       setTimeout(() => {
-        document.querySelector(btn + "add").style.display = "none";
-        document.querySelector(btn + "update").style.display = "none";
-        document.querySelector(btn + "delete").style.display = "none";
+        document.querySelector(menu.btnAdd).style.display = "none";
+        document.querySelector(menu.btnUpdate).style.display = "none";
+        document.querySelector(menu.btnDelete).style.display = "none";
       }, 200);
       setTimeout(() => {
-        if (document.querySelector(btn + "update").style.display == "none" 
-        &&  document.querySelector(menu).style.display != "none") {
-          document.querySelector(menu).style.display = "none";
+        if (
+          document.querySelector(menu.btnUpdate).style.display == "none" &&
+          document.querySelector(menu.menu).style.display != "none"
+        ) {
+          document.querySelector(menu.menu).style.display = "none";
         }
       }, 2000);
       buttonFlag = 0;
     }
   }
 
-  exportData(action) {
+  exportData(action, form) {
     let rubro = document.getElementById("rubro_nro");
     let rubroDescri = document.getElementById("rubro_detalle");
     let nivel = document.getElementById("nivel");
@@ -402,10 +483,10 @@ export default class rubros {
     if (action == "update") {
       exNivel = document.getElementById(`${action}NivelRubro`);
       exNivel.value = nivel.value;
-      updateForm.setAttribute("action", `/updateRubro/${cod}/${cod2}`);
+      document.querySelector(form).setAttribute("action", `/updateRubro/${cod}/${cod2}`);
     }
     if (action == "del") {
-      deleteForm.setAttribute("action", `/deleteRubro/${cod}/${cod2}`);
+      document.querySelector(form).setAttribute("action", `/deleteRubro/${cod}/${cod2}`);
     }
   }
 
@@ -464,11 +545,11 @@ export default class rubros {
         final.value = "No existe este rubro";
       });
   }
-  
+
   cajaChica() {
-    rubroNro.focus()
-    rubroNro.value = 0
-    nivel.value = 0
+    rubroNro.focus();
+    rubroNro.value = 0;
+    nivel.value = 0;
     axios
       .post(`/rubrosByNro`, { nro: 0 })
       .then((response) => {
@@ -536,11 +617,11 @@ export default class rubros {
           mes +
           "/" +
           year;
-  
+
         if (beneficiario != "0") {
           unir += " - " + beneficiario;
         }
-  
+
         final = document.getElementById("resultado");
         final.value = unir;
         /* Select the text field */
@@ -560,7 +641,7 @@ export default class rubros {
         final.value = `¡Te faltó cargar rubro!`;
         rubroNro.select();
       }
-    }else{
+    } else {
       final.value = `¡Te faltó cargar rubro!`;
       rubroNro.select();
     }

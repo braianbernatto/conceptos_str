@@ -1,6 +1,6 @@
 <div class="wrap">
     <!-- ADD -->
-      <form action="/addRubro" method="POST" stage="off" class="addForm animate__animated animate__bounceInDown" id="addForm">
+      <form action="/addRubro" method="POST" stage="off" class="addForm animate__animated animate__bounceInDown" id="addFormRubro">
         <div class="div_resize">
           <label id="" for="addRubroNro" class="titles">AGREGAR RUBRO</label>
           <label id="" for="addRubroNro" class="L2 mainlabels">RUBRO</label>
@@ -12,13 +12,13 @@
           <input id="addRubroNivel" name="rubroNivel" type="number" class="short"/>
         </div>
         <div class="btnActions">
-          <button for="" class="btn btnGuardar icon-plus" id="btnGuardar"></button>
-          <button for="" class="btn btnCancelar icon-cancel" id="btnCancelar"></button>
+          <button for="" class="btn btnGuardar icon-plus" id="btnSaveRubro"></button>
+          <button for="" class="btn btnCancelar icon-cancel" id="btnCancelRubro"></button>
         </div>
       </form>  
 
       <!-- UPDATE -->
-      <form action="/updateRubro" method="POST" stage="off" class="updateForm animate__animated animate__bounceInDown" id="updateForm">
+      <form action="/updateRubro" method="POST" stage="off" class="updateForm animate__animated animate__bounceInDown" id="updateFormRubro">
         <div class="div_resize">
           <label id="" for="updateRubroNro" class="titles">MODIFICAR RUBRO</label>
           <label id="rubro_btn2" for="updateRubroNro" class="L2 mainlabels">RUBRO</label>
@@ -30,13 +30,13 @@
           <input id="updateNivelRubro" name="rubroNivel" type="number" class="short"/>
         </div>
         <div class="btnActions">
-          <button for="" class=" btn btnModificar icon-arrows-cw" id="btnModificar"></button>
-          <button for="" class="btn btnCancelar2 icon-cancel" id="btnCancelar2"></button>
+          <button for="" class=" btn btnModificar icon-arrows-cw" id="btnSaveRubroUpdate"></button>
+          <button for="" class="btn btnCancelar icon-cancel" id="btnCancelRubroUpdate"></button>
         </div>
       </form> 
 
       <!-- DELETE -->
-      <form action="#" method="POST" stage="off" class="deleteForm animate__animated animate__bounceInDown" id="deleteForm">
+      <form action="#" method="POST" stage="off" class="deleteForm animate__animated animate__bounceInDown" id="deleteFormRubro">
         <div class="div_resize">
           <label id="" for="delRubroNro" class="titles">¿SEGURO QUE DESEA ELIMINAR?</label>
           <label id="" for="delRubroNro" class="L2 mainlabels">RUBRO</label>
@@ -44,8 +44,8 @@
           <input name="delRubroDescri" type="text" id="delRubroDescri" class="long" readonly/>
         </div>      
         <div class="btnActions">
-          <button for="" class="btn btnEliminar icon-trash-2" id="btnEliminar"></button>
-          <button for="" class="btn btnCancelar3 icon-cancel" id="btnCancelar3"></button>
+          <button for="" class="btn btnEliminar icon-trash-2" id="btnSaveRubroDelete"></button>
+          <button for="" class="btn btnCancelar icon-cancel" id="btnCancelRubroDelete"></button>
         </div>
       </form> 
       
