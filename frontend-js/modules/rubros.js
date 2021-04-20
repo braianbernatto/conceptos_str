@@ -13,13 +13,13 @@ let benefSelect = document.querySelector("#beneficiarios");
 // btn menu
 let btnRubro = document.querySelector("#menu_rubro");
 let btnNivel = document.querySelector("#menu_nivel");
-let btnDesc = document.querySelector("#menu_descuento");
+let btnDesc = document.querySelector("#menu_beneficiario");
 let btnTipo = document.querySelector("#menu_tipo");
 let btnMes = document.querySelector("#menu_mes");
 // btn labels
 let rubroLabel = document.querySelector("#rubro_btn");
 let nivelLabel = document.querySelector("#nivel_btn");
-let descuentoLabel = document.querySelector("#descuento_btn");
+let descuentoLabel = document.querySelector("#beneficiario_btn");
 let tipoLabel = document.querySelector("#tipo_btn");
 let mesLabel = document.querySelector("#mes_btn");
 
@@ -45,21 +45,7 @@ let rubroCrud = {
   btnUpdateCancel: "#btnCancelRubroUpdate",
   btnDelSave: "#btnSaveRubroDelete",
   btnDelCancel: "#btnCancelRubroDelete",
-};
-let rubroCrud2 = {
-  menu: "#menu_rubro",
-  addForm: "#addForm",
-  updateForm: "#updateForm",
-  deleteForm: "#deleteForm",
-  btnAdd: "#btn_rubro_add",
-  btnUpdate: "#btn_rubro_update",
-  btnDelete: "#btn_rubro_delete",
-  btnAddSave: "#btnSaveRubro",
-  btnAddCancel: "#btnCancelRubro",
-  btnUpdateSave: "#btnSaveRubroUpdate",
-  btnUpdateCancel: "#btnCancelRubroUpdate",
-  btnDelSave: "#btnSaveRubroDelete",
-  btnDelCancel: "#btnCancelRubroDelete",
+  focusInput:"#addRubroNro",
 };
 let nivelCrud = {
   menu: "#menu_nivel",
@@ -75,21 +61,23 @@ let nivelCrud = {
   btnUpdateCancel: "#",
   btnDelSave: "#",
   btnDelCancel: "#",
+  focusInput:"#"
 };
-let descCrud = {
-  menu: "#menu_descuento",
-  addForm: "#",
-  updateForm: "#",
-  deleteForm: "#",
-  btnAdd: "#btn_desc_add",
-  btnUpdate: "#btn_desc_update",
-  btnDelete: "#btn_desc_delete",
-  btnAddSave: "#",
-  btnAddCancel: "#",
-  btnUpdateSave: "#",
-  btnUpdateCancel: "#",
-  btnDelSave: "#",
-  btnDelCancel: "#",
+let benefCrud = {
+  menu: "#menu_beneficiario",
+  addForm: "#addFormBeneficiario",
+  updateForm: "#updateFormBeneficiario",
+  deleteForm: "#deleteFormBeneficiario",
+  btnAdd: "#btn_benef_add",
+  btnUpdate: "#btn_benef_update",
+  btnDelete: "#btn_benef_delete",
+  btnAddSave: "#btnSaveBenef",
+  btnAddCancel: "#btnCancelBenef",
+  btnUpdateSave: "#btnSaveBenefUpdate",
+  btnUpdateCancel: "#btnCancelBenefUpdate",
+  btnDelSave: "#btnSaveBenefDelete",
+  btnDelCancel: "#btnCancelBenefDelete",
+  focusInput:"#addBenefDescri"
 };
 let tipoCrud = {
   menu: "#menu_tipo",
@@ -105,6 +93,7 @@ let tipoCrud = {
   btnUpdateCancel: "#",
   btnDelSave: "#",
   btnDelCancel: "#",
+  focusInput:"#"
 };
 let mesCrud = {
   menu: "#menu_mes",
@@ -120,6 +109,7 @@ let mesCrud = {
   btnUpdateCancel: "#",
   btnDelSave: "#",
   btnDelCancel: "#",
+  focusInput:"#"
 };
 
 document.querySelector("#rubro_nro").value = "";
@@ -142,7 +132,9 @@ setTimeout(() => {
 export default class rubros {
   constructor() {
     this.events();
-    this.preventEnterSend([rubroCrud]);  
+    this.preventEnterSend([rubroCrud, benefCrud]);  
+    this.openCrudForm(rubroCrud);
+    this.openCrudForm(benefCrud);
   }
 
   // events
@@ -259,7 +251,7 @@ export default class rubros {
       this.expandMenu(nivelCrud);
     });
     btnDesc.addEventListener("click", () => {
-      this.expandMenu(descCrud);
+      this.expandMenu(benefCrud);
     });
     btnTipo.addEventListener("click", () => {
       this.expandMenu(tipoCrud);
@@ -293,68 +285,77 @@ export default class rubros {
       this.closeAllMenu();
       this.showMenu("mes");
     });
-
-    // mostrar u ocultar add rubros
-    document.querySelector(rubroCrud.btnAdd).addEventListener("click", () => {
-      document.querySelector(rubroCrud.addForm).style.display = "flex";
-      document.querySelector(rubroCrud.menu).click();
-      document.querySelector("#addRubroNro").focus();
-      
-    });
-    document
-      .querySelector(rubroCrud.btnAddCancel)
-      .addEventListener("click", () => {
-        document.querySelector(rubroCrud.addForm).style.display = "none";
-      });
-
-    // mostrar u ocultar update rubros
-    document
-      .querySelector(rubroCrud.btnUpdate)
-      .addEventListener("click", () => {
-        if (rubroNro.value.trim() != "") {
-          this.exportData("update",rubroCrud.updateForm);
-          document.querySelector(rubroCrud.updateForm).style.display = "flex";
-          document.querySelector(rubroCrud.menu).click();
-        } else {
-          rubroNro.classList.add("errorShadow");
-          rubroNro.focus();
-          setTimeout(() => {
-            rubroNro.classList.remove("errorShadow");
-          }, 3000);
-        }
-      });
-    document
-      .querySelector(rubroCrud.btnUpdateCancel)
-      .addEventListener("click", () => {
-        document.querySelector(rubroCrud.updateForm).style.display = "none";
-      });
-
-    // mostrar u ocultar delete rubros
-    document
-      .querySelector(rubroCrud.btnDelete)
-      .addEventListener("click", () => {
-        if (rubroNro.value.trim() != "") {
-          this.exportData("del", rubroCrud.deleteForm);
-          document.querySelector(rubroCrud.deleteForm).style.display = "flex";
-          document.querySelector(rubroCrud.menu).click();
-        } else {
-          rubroNro.classList.add("errorShadow");
-          rubroNro.focus();
-          setTimeout(() => {
-            rubroNro.classList.remove("errorShadow");
-          }, 3000);
-        }
-      });
-    document
-      .querySelector(rubroCrud.btnDelCancel)
-      .addEventListener("click", () => {
-        document.querySelector(rubroCrud.deleteForm).style.display = "none";
-      });
+ 
 
     // end of events
   }
 
   // methods
+  openCrudForm(type){
+    let emptyCheck
+    switch (type) {
+      case rubroCrud:
+        emptyCheck = rubroNro
+        break
+    
+    }
+     // mostrar u ocultar add
+     document.querySelector(type.btnAdd).addEventListener("click", () => {
+      document.querySelector(type.addForm).style.display = "flex";
+      document.querySelector(type.menu).click();
+      document.querySelector(type.focusInput).focus();      
+    });
+    document.querySelector(type.btnAddCancel).addEventListener("click", () => {
+        document.querySelector(type.addForm).style.display = "none";
+      });
+
+    // mostrar u ocultar update
+    document
+      .querySelector(type.btnUpdate)
+      .addEventListener("click", () => {
+        if (emptyCheck.value.trim() != "") {
+          this.exportData("update",type.updateForm);
+          document.querySelector(type.updateForm).style.display = "flex";
+          document.querySelector(type.menu).click();
+        } else {
+          emptyCheck.classList.add("errorShadow");
+          emptyCheck.focus();
+          setTimeout(() => {
+            emptyCheck.classList.remove("errorShadow");
+          }, 3000);
+        }
+      });
+    document
+      .querySelector(type.btnUpdateCancel)
+      .addEventListener("click", () => {
+        document.querySelector(type.updateForm).style.display = "none";
+      });
+  
+    // mostrar u ocultar delete
+    document
+      .querySelector(type.btnDelete)
+      .addEventListener("click", () => {
+        if (emptyCheck.value.trim() != "") {
+          this.exportData("del", type.deleteForm);
+          document.querySelector(type.deleteForm).style.display = "flex";
+          document.querySelector(type.menu).click();
+        } else {
+          emptyCheck.classList.add("errorShadow");
+          emptyCheck.focus();
+          setTimeout(() => {
+            emptyCheck.classList.remove("errorShadow");
+          }, 3000);
+        }
+      });
+    document
+      .querySelector(type.btnDelCancel)
+      .addEventListener("click", () => {
+        document.querySelector(type.deleteForm).style.display = "none";
+      });
+
+  }
+
+
   preventEnterSend(buttons) {
     buttons.forEach((button) => {
       document
@@ -394,7 +395,7 @@ export default class rubros {
         break;
 
       case "descuento":
-        menu = descCrud.menu;
+        menu = benefCrud.menu;
         break;
 
       case "tipo":
@@ -465,14 +466,12 @@ export default class rubros {
     let exRubro = document.getElementById(`${action}RubroNro`);
     let exRubroDescri = document.getElementById(`${action}RubroDescri`);
     let exNivel = "";
-    let cod = "";
-    let cod2 = "";
-
+    let id2 = "";
+    
     exRubro.value = rubro.value;
     exRubroDescri.value = rubroDescri.value;
 
-    cod = rubro.value;
-    cod2 = rubroDescri.options[rubroDescri.selectedIndex].getAttribute("id2");
+    id2 = rubroDescri.options[rubroDescri.selectedIndex].getAttribute("id2");
 
     if (exRubroDescri.value.length > 39) {
       exRubroDescri.style.width = "100%";
@@ -483,10 +482,10 @@ export default class rubros {
     if (action == "update") {
       exNivel = document.getElementById(`${action}NivelRubro`);
       exNivel.value = nivel.value;
-      document.querySelector(form).setAttribute("action", `/updateRubro/${cod}/${cod2}`);
+      document.querySelector(form).setAttribute("action", `/updateRubro/${id2}`);
     }
     if (action == "del") {
-      document.querySelector(form).setAttribute("action", `/deleteRubro/${cod}/${cod2}`);
+      document.querySelector(form).setAttribute("action", `/deleteRubro/${id2}`);
     }
   }
 

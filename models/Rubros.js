@@ -27,11 +27,11 @@ Rubros.prototype.cleanUp = function (action) {
   };
   
   if (action == "update") {
-    if (typeof this.params.id2 != "string") {
-      this.params.id2 = "";
+    if (typeof this.params.id != "string") {
+      this.params.id = "";
     }
     this.params = {
-      id2: this.params.id2
+      id: this.params.id
     }
   }
 };
@@ -58,10 +58,10 @@ Rubros.prototype.validate = function (action) {
   }
   
   if (action == "update") {
-    if (this.params.id2 == "") {
+    if (this.params.id == "") {
       this.errors.push("Falta el segundo ID");
     }
-    if (this.params.id2 != "" && !validator.isInt(this.params.id2)
+    if (this.params.id != "" && !validator.isInt(this.params.id)
     ) {
       this.errors.push("El segundo ID debe ser un número");
     }
@@ -150,7 +150,7 @@ Rubros.prototype.updateRubro = function () {
       try {
         let rubro = await pool.query(
           `update rubros set rub_descri = '${this.data.rubroDescri}', nivel_cod = ${this.data.rubroNivel} 
-          where rub_cod =  ${this.data.rubroNro} and rub_cod2 = ${this.params.id2}`
+          where rub_cod =  ${this.data.rubroNro} and rub_cod2 = ${this.params.id}`
         );
         resolve(rubro);
       } catch {

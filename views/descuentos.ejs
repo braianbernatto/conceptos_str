@@ -1,0 +1,41 @@
+<div class="wrap">
+    <!-- ADD -->
+      <form action="/beneficiario" method="POST" stage="off" class="addForm animate__animated animate__bounceInDown" id="addFormBeneficiario">
+        <div class="div_resize">
+          <label id="" for="addBenefDescri" class="titles">AGREGAR BENEFICIARIO</label>
+          <label id="" for="addBenefDescri" class="L3 mainlabels">BENEFICIARIO</label>
+          <input name="addBenefDescri" type="text" id="addBenefDescri" onclick="this.select()" class="long"/>
+        </div>
+        <div class="btnActions">
+          <button for="" class="btn btnGuardar icon-plus" id="btnSaveBenef"></button>
+          <button for="" class="btn btnCancelar icon-cancel" id="btnCancelBenef"></button>
+        </div>
+      </form>  
+
+      <!-- UPDATE -->
+      <form action="/updateBeneficiario" method="POST" stage="off" class="updateForm animate__animated animate__bounceInDown" id="updateFormBeneficiario">
+        <div class="div_resize">
+          <label id="" for="btnCancelBenefUpdate" class="titles">MODIFICAR BENEFICIARIO</label>
+          <label id="" for="btnCancelBenefUpdate" class="L3 mainlabels">BENEFICIARIO</label>
+          <input name="updateBenefDescri" type="text" id="updateBenefDescri" class="long">
+        </div>
+        <div class="btnActions">
+          <button for="" class=" btn btnModificar icon-arrows-cw" id="btnSaveBenefUpdate"></button>
+          <button for="" class="btn btnCancelar icon-cancel" id="btnCancelBenefUpdate"></button>
+        </div>
+      </form> 
+
+      <!-- DELETE -->
+      <form action="#" method="POST" stage="off" class="deleteForm animate__animated animate__bounceInDown" id="deleteFormBeneficiario">
+        <div class="div_resize">
+          <label id="" for="delBenefDescri" class="titles">¿SEGURO QUE DESEA ELIMINAR?</label>
+          <label id="" for="delBenefDescri" class="L3 mainlabels">BENEFICIARIO</label>
+          <input name="delBenefDescri" type="text" id="delBenefDescri" class="long" readonly/>
+        </div>      
+        <div class="btnActions">
+          <button for="" class="btn btnEliminar icon-trash-2" id="btnSaveBenefDelete"></button>
+          <button for="" class="btn btnCancelar icon-cancel" id="btnCancelBenefDelete"></button>
+        </div>
+      </form> 
+      
+    </div>

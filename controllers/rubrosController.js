@@ -42,7 +42,7 @@ exports.updateRubro = function (req, res) {
 }
 
 exports.deleteRubro = function (req, res) {
-  Rubros.deleteRubro(req.params.id, req.params.id2).then(()=>{
+  Rubros.deleteRubro(req.body.delRubroNro, req.params.id).then(()=>{
     req.flash("success","¡Eliminado con éxito!")
     req.session.save(()=> res.redirect(`/`))
   }).catch((error)=>{

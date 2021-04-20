@@ -10,8 +10,8 @@ router.post("/rubrosByNro", RubrosController.byNro)
 router.post("/nivelById", RubrosController.nivel)
 router.post("/tipoPrograma", TipoProgramaController.getTipoPrograma)
 router.post("/addRubro", RubrosController.addRubro)
-router.post("/deleteRubro/:id/:id2", RubrosController.deleteRubro)
-router.post("/updateRubro/:id/:id2", RubrosController.updateRubro)
+router.post("/deleteRubro/:id", RubrosController.deleteRubro)
+router.post("/updateRubro/:id", RubrosController.updateRubro)
 
 // user related routes
 router.post("/logout", UserController.logOut)

@@ -31,6 +31,7 @@
     <%- include("includes/flash") %>  
     <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
     <%- include("rubros") %> 
+    <%- include("descuentos") %> 
     <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
     <div class="container animate__animated animate__bounceInUp">
       <div class="div_resize">
@@ -60,16 +61,16 @@
       </div>
       <div class="div_resize">
         <!-- menu -->
-        <button class="menu mainMenu icon-dot-3" id="menu_descuento"></button>
-        <button class="menu menu_items btn_add icon-plus" id="btn_desc_add"></button> 
-        <button class="menu menu_items btn_update icon-arrows-cw" id="btn_desc_update"></button> 
-        <button class="menu menu_items btn_delete icon-trash-2" id="btn_desc_delete"></button>
+        <button class="menu mainMenu icon-dot-3" id="menu_beneficiario"></button>
+        <button class="menu menu_items btn_add icon-plus" id="btn_benef_add"></button> 
+        <button class="menu menu_items btn_update icon-arrows-cw" id="btn_benef_update"></button> 
+        <button class="menu menu_items btn_delete icon-trash-2" id="btn_benef_delete"></button>
         <!--  -->
-        <label id="descuento_btn" class="L3 mainlabels" for="beneficiarios">DESCUENTOS</label>
+        <label id="beneficiario_btn" class="L3 mainlabels" for="beneficiarios">DESCUENTOS</label>
         <select name="beneficiarios" id="beneficiarios">
           <option class="" id="opt_benef" value="0">-----SELECCIONAR BENEFICIARIO-----</option>
           <% benef.forEach(function (benef) { %>
-            <option class="" value="<%= benef.desc_beneficiario %>"><%= benef.desc_beneficiario %></option>
+            <option class="" id="<%= benef.desc_cod %>" value="<%= benef.desc_beneficiario %>"><%= benef.desc_beneficiario %></option>
             <% }) %> 
           </select>
         </div>
@@ -83,7 +84,7 @@
         <label id="mes_btn" class="L4 mainlabels" for="mes">MES</label>
         <select name="mes" id="mes" class="">
           <% mes.forEach(function (mes) { %>
-            <option class="" value="<%= mes.mes_descri %>"><%= mes.mes_descri %></option>
+            <option class="" id="<%= mes.mes_cod %>" value="<%= mes.mes_descri %>"><%= mes.mes_descri %></option>
             <% }) %>  
           </select>
         </div>
