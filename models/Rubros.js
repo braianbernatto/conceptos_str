@@ -114,6 +114,7 @@ Rubros.prototype.isUnique = function (action) {
     };
     
     Rubros.prototype.addRubro = function () {
+      let rubro 
       return new Promise(async (resolve, reject) => {
         // first clean and validate data
         this.cleanUp("add");
@@ -122,14 +123,25 @@ Rubros.prototype.isUnique = function (action) {
         // only if there are no errors proceedo to save into the database
         if (!this.errors.length) {
             try {
-              let rubro = await pool.query(
-                `insert into rubros (rub_cod, rub_cod2, rub_descri, nivel_cod) values (
-                  ${this.data.rubroNro}, (select max(rub_cod2)+1 as new from rubros where rub_cod = ${this.data.rubroNro}) , 
-              '${this.data.rubroDescri}', ${this.data.rubroNivel})`
-        );
+              let count = await pool.query(
+                `select max(rub_cod2)+1 as new from rubros where rub_cod = ${this.data.rubroNro}`)
+       
+              if(count[0].new == null){
+                rubro = await pool.query(
+                  `insert into rubros (rub_cod, rub_cod2, rub_descri, nivel_cod) values (
+                    ${this.data.rubroNro}, 1, 
+                    '${this.data.rubroDescri}', ${this.data.rubroNivel})`);
+                    
+                  }else{
+                    rubro = await pool.query(
+                  `insert into rubros (rub_cod, rub_cod2, rub_descri, nivel_cod) values (
+                    ${this.data.rubroNro}, (select max(rub_cod2)+1 as new from rubros where rub_cod = ${this.data.rubroNro}) , 
+                '${this.data.rubroDescri}', ${this.data.rubroNivel})`);
+              }
         resolve(rubro);
-      } catch {
+      } catch(e) {
         this.errors.push("Please try again later :)");
+        this.errors.push(e.message);
         reject(this.errors);
       }
     } else {
