@@ -141,7 +141,7 @@ Rubros.prototype.isUnique = function (action) {
         resolve(rubro);
       } catch(e) {
         this.errors.push("Please try again later :)");
-        this.errors.push(e.message);
+        console.log(e.message);
         reject(this.errors);
       }
     } else {

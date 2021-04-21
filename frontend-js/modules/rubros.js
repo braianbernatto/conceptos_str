@@ -25,7 +25,6 @@ let mesLabel = document.querySelector("#mes_btn");
 
 let rubroAnterior = "";
 let buttonFlag = 0;
-let menu = "";
 
 final.value = "";
 nivel.value = "";
@@ -133,8 +132,8 @@ export default class rubros {
   constructor() {
     this.events();
     this.preventEnterSend([rubroCrud, benefCrud]);  
-    this.openCrudForm(rubroCrud);
-    this.openCrudForm(benefCrud);
+    this.openCrudForm("rubro", rubroCrud);
+    this.openCrudForm("beneficiario", benefCrud);
   }
 
   // events
@@ -291,32 +290,36 @@ export default class rubros {
   }
 
   // methods
-  openCrudForm(type){
+  openCrudForm(type, form){
     let emptyCheck
-    switch (type) {
+    switch (form) {
       case rubroCrud:
-        emptyCheck = rubroNro
+        emptyCheck = rubroNro      
         break
+        
+        case benefCrud:
+          emptyCheck = benefSelect      
+      break
     
     }
      // mostrar u ocultar add
-     document.querySelector(type.btnAdd).addEventListener("click", () => {
-      document.querySelector(type.addForm).style.display = "flex";
-      document.querySelector(type.menu).click();
-      document.querySelector(type.focusInput).focus();      
+     document.querySelector(form.btnAdd).addEventListener("click", () => {
+      document.querySelector(form.addForm).style.display = "flex";
+      document.querySelector(form.menu).click();
+      document.querySelector(form.focusInput).focus();      
     });
-    document.querySelector(type.btnAddCancel).addEventListener("click", () => {
-        document.querySelector(type.addForm).style.display = "none";
+    document.querySelector(form.btnAddCancel).addEventListener("click", () => {
+        document.querySelector(form.addForm).style.display = "none";
       });
 
     // mostrar u ocultar update
     document
-      .querySelector(type.btnUpdate)
+      .querySelector(form.btnUpdate)
       .addEventListener("click", () => {
-        if (emptyCheck.value.trim() != "") {
-          this.exportData("update",type.updateForm);
-          document.querySelector(type.updateForm).style.display = "flex";
-          document.querySelector(type.menu).click();
+        if (emptyCheck != "") {
+          this.exportData(type,"update",form.updateForm);
+          document.querySelector(form.updateForm).style.display = "flex";
+          document.querySelector(form.menu).click();
         } else {
           emptyCheck.classList.add("errorShadow");
           emptyCheck.focus();
@@ -326,19 +329,19 @@ export default class rubros {
         }
       });
     document
-      .querySelector(type.btnUpdateCancel)
+      .querySelector(form.btnUpdateCancel)
       .addEventListener("click", () => {
-        document.querySelector(type.updateForm).style.display = "none";
+        document.querySelector(form.updateForm).style.display = "none";
       });
   
     // mostrar u ocultar delete
     document
-      .querySelector(type.btnDelete)
+      .querySelector(form.btnDelete)
       .addEventListener("click", () => {
-        if (emptyCheck.value.trim() != "") {
-          this.exportData("del", type.deleteForm);
-          document.querySelector(type.deleteForm).style.display = "flex";
-          document.querySelector(type.menu).click();
+        if (emptyCheck != "") {
+          this.exportData(type,"del", form.deleteForm);
+          document.querySelector(form.deleteForm).style.display = "flex";
+          document.querySelector(form.menu).click();
         } else {
           emptyCheck.classList.add("errorShadow");
           emptyCheck.focus();
@@ -348,13 +351,12 @@ export default class rubros {
         }
       });
     document
-      .querySelector(type.btnDelCancel)
+      .querySelector(form.btnDelCancel)
       .addEventListener("click", () => {
-        document.querySelector(type.deleteForm).style.display = "none";
+        document.querySelector(form.deleteForm).style.display = "none";
       });
 
   }
-
 
   preventEnterSend(buttons) {
     buttons.forEach((button) => {
@@ -458,34 +460,62 @@ export default class rubros {
     }
   }
 
-  exportData(action, form) {
-    let rubro = document.getElementById("rubro_nro");
-    let rubroDescri = document.getElementById("rubro_detalle");
-    let nivel = document.getElementById("nivel");
+  exportData(type, action, form) {
+    switch (type) {
+      case "rubro":
+              let rubro = document.getElementById("rubro_nro");
+              let rubroDescri = document.getElementById("rubro_detalle");
+              let nivel = document.getElementById("nivel");
 
-    let exRubro = document.getElementById(`${action}RubroNro`);
-    let exRubroDescri = document.getElementById(`${action}RubroDescri`);
-    let exNivel = "";
-    let id2 = "";
+              let exRubro = document.getElementById(`${action}RubroNro`);
+              let exRubroDescri = document.getElementById(`${action}RubroDescri`);
+              let exNivel = "";
+              let id2 = "";
+              
+              exRubro.value = rubro.value;
+              exRubroDescri.value = rubroDescri.value;
+
+              id2 = rubroDescri.options[rubroDescri.selectedIndex].getAttribute("id2");
+
+              if (exRubroDescri.value.length > 39) {
+                exRubroDescri.style.width = "100%";
+              } else {
+                exRubroDescri.style.width = "auto";
+              }
+
+              if (action == "update") {
+                // only when is update there's need for export nivel
+                exNivel = document.getElementById(`${action}NivelRubro`);
+                exNivel.value = nivel.value;
+                // 
+                document.querySelector(form).setAttribute("action", `/updateRubro/${id2}`);
+              }
+              if (action == "del") {
+                document.querySelector(form).setAttribute("action", `/deleteRubro/${id2}`);
+              }
+        break;
     
-    exRubro.value = rubro.value;
-    exRubroDescri.value = rubroDescri.value;
+      case "beneficiario":
 
-    id2 = rubroDescri.options[rubroDescri.selectedIndex].getAttribute("id2");
+              let exBenef = document.getElementById(`${action}BenefDescri`);
+              let id = "";
+              
+              exBenef.value = benefSelect.value;
+              id = benefSelect.options[benefSelect.selectedIndex].getAttribute("id");
 
-    if (exRubroDescri.value.length > 39) {
-      exRubroDescri.style.width = "100%";
-    } else {
-      exRubroDescri.style.width = "auto";
-    }
+              if (exBenef.value.length > 39) {
+                exBenef.style.width = "100%";
+              } else {
+                exBenef.style.width = "auto";
+              }
 
-    if (action == "update") {
-      exNivel = document.getElementById(`${action}NivelRubro`);
-      exNivel.value = nivel.value;
-      document.querySelector(form).setAttribute("action", `/updateRubro/${id2}`);
-    }
-    if (action == "del") {
-      document.querySelector(form).setAttribute("action", `/deleteRubro/${id2}`);
+              if (action == "update") {
+                document.querySelector(form).setAttribute("action", `/updateBeneficiario/${id}`);
+              }
+              if (action == "del") {
+                document.querySelector(form).setAttribute("action", `/deleteBeneficiario/${id}`);
+              }
+        break;
     }
   }
 
