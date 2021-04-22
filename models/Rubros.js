@@ -1,5 +1,6 @@
 const pool = require("../db");
 const validator = require("validator");
+const sanitizeHTML = require("sanitize-html")
 
 let Rubros = function (data, params) {
   this.data = data;
@@ -21,9 +22,9 @@ Rubros.prototype.cleanUp = function (action) {
   
   // get rid of any bogus properties
   this.data = {
-    rubroNro: this.data.rubroNro.trim(),
-    rubroDescri:  this.data.rubroDescri.trim().toUpperCase(),
-    rubroNivel: this.data.rubroNivel.trim(),    
+    rubroNro: sanitizeHTML(this.data.rubroNro.trim(), {allowedTags: [], allowedAttributes: []}),
+    rubroDescri: sanitizeHTML(this.data.rubroDescri.trim().toUpperCase(), {allowedTags: [], allowedAttributes: []}),
+    rubroNivel: sanitizeHTML(this.data.rubroNivel.trim(), {allowedTags: [], allowedAttributes: []}),
   };
   
   if (action == "update") {

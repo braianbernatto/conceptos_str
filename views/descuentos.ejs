@@ -1,10 +1,10 @@
 <div class="wrap">
     <!-- ADD -->
-      <form action="/beneficiario" method="POST" stage="off" class="addForm animate__animated animate__bounceInDown" id="addFormBeneficiario">
+      <form action="/addBeneficiario" method="POST" stage="off" class="addForm animate__animated animate__bounceInDown" id="addFormBeneficiario">
         <div class="div_resize">
           <label id="" for="addBenefDescri" class="titles">AGREGAR BENEFICIARIO</label>
           <label id="" for="addBenefDescri" class="L3 mainlabels">BENEFICIARIO</label>
-          <input name="addBenefDescri" type="text" id="addBenefDescri" onclick="this.select()" class="long"/>
+          <input name="BenefDescri" type="text" id="addBenefDescri" onclick="this.select()" class="long"/>
         </div>
         <div class="btnActions">
           <button for="" class="btn btnGuardar icon-plus" id="btnSaveBenef"></button>
@@ -17,7 +17,7 @@
         <div class="div_resize">
           <label id="" for="btnCancelBenefUpdate" class="titles">MODIFICAR BENEFICIARIO</label>
           <label id="" for="btnCancelBenefUpdate" class="L3 mainlabels">BENEFICIARIO</label>
-          <input name="updateBenefDescri" type="text" id="updateBenefDescri" class="long">
+          <input name="BenefDescri" type="text" id="updateBenefDescri" class="long">
         </div>
         <div class="btnActions">
           <button for="" class=" btn btnModificar icon-arrows-cw" id="btnSaveBenefUpdate"></button>
@@ -30,7 +30,7 @@
         <div class="div_resize">
           <label id="" for="delBenefDescri" class="titles">¿SEGURO QUE DESEA ELIMINAR?</label>
           <label id="" for="delBenefDescri" class="L3 mainlabels">BENEFICIARIO</label>
-          <input name="delBenefDescri" type="text" id="delBenefDescri" class="long" readonly/>
+          <input name="BenefDescri" type="text" id="delBenefDescri" class="long" readonly/>
         </div>      
         <div class="btnActions">
           <button for="" class="btn btnEliminar icon-trash-2" id="btnSaveBenefDelete"></button>

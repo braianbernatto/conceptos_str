@@ -15,7 +15,7 @@ router.post("/deleteRubro/:id", RubrosController.deleteRubro)
 router.post("/updateRubro/:id", RubrosController.updateRubro)
 
 // beneficiarios related routes
-// router.post("/addBeneficiario", BeneficiariosController.addBeneficiario)
+router.post("/addBeneficiario", BeneficiariosController.addBeneficiario)
 
 // user related routes
 router.post("/logout", UserController.logOut)

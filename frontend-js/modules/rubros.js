@@ -292,16 +292,7 @@ export default class rubros {
   // methods
   openCrudForm(type, form){
     let emptyCheck
-    switch (form) {
-      case rubroCrud:
-        emptyCheck = rubroNro      
-        break
-        
-        case benefCrud:
-          emptyCheck = benefSelect      
-      break
-    
-    }
+  
      // mostrar u ocultar add
      document.querySelector(form.btnAdd).addEventListener("click", () => {
       document.querySelector(form.addForm).style.display = "flex";
@@ -316,17 +307,35 @@ export default class rubros {
     document
       .querySelector(form.btnUpdate)
       .addEventListener("click", () => {
-        if (emptyCheck != "") {
-          this.exportData(type,"update",form.updateForm);
-          document.querySelector(form.updateForm).style.display = "flex";
-          document.querySelector(form.menu).click();
-        } else {
-          emptyCheck.classList.add("errorShadow");
-          emptyCheck.focus();
-          setTimeout(() => {
-            emptyCheck.classList.remove("errorShadow");
-          }, 3000);
-        }
+      // rubro
+        if (type == "rubro") {
+          emptyCheck = rubroNro
+          if (emptyCheck.value.trim() != "") {
+            this.exportData(type,"update",form.updateForm);
+            document.querySelector(form.updateForm).style.display = "flex";
+            document.querySelector(form.menu).click();
+          }else {
+            emptyCheck.classList.add("errorShadow");
+            emptyCheck.focus();
+            setTimeout(() => {
+              emptyCheck.classList.remove("errorShadow");
+            }, 3000);
+          }
+          // beneficiario
+        }else if(type == "beneficiario") {
+          emptyCheck = benefSelect
+            if (emptyCheck.value != "0") {
+              this.exportData(type,"update",form.updateForm);
+              document.querySelector(form.updateForm).style.display = "flex";
+              document.querySelector(form.menu).click();
+            }else {
+              emptyCheck.classList.add("errorShadow");
+              emptyCheck.focus();
+              setTimeout(() => {
+                emptyCheck.classList.remove("errorShadow");
+              }, 3000);
+            }
+          }                 
       });
     document
       .querySelector(form.btnUpdateCancel)
@@ -338,7 +347,9 @@ export default class rubros {
     document
       .querySelector(form.btnDelete)
       .addEventListener("click", () => {
-        if (emptyCheck != "") {
+        if (type == "rubro") {
+          emptyCheck = rubroNro
+        if (emptyCheck.value.trim() != "") {
           this.exportData(type,"del", form.deleteForm);
           document.querySelector(form.deleteForm).style.display = "flex";
           document.querySelector(form.menu).click();
@@ -349,6 +360,20 @@ export default class rubros {
             emptyCheck.classList.remove("errorShadow");
           }, 3000);
         }
+      }else if(type == "beneficiario"){
+        emptyCheck = benefSelect
+        if (emptyCheck.value != "0") {
+          this.exportData(type,"del", form.deleteForm);
+          document.querySelector(form.deleteForm).style.display = "flex";
+          document.querySelector(form.menu).click();
+        } else {
+          emptyCheck.classList.add("errorShadow");
+          emptyCheck.focus();
+          setTimeout(() => {
+            emptyCheck.classList.remove("errorShadow");
+          }, 3000);
+        }
+      }
       });
     document
       .querySelector(form.btnDelCancel)
