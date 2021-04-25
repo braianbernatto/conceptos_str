@@ -32,6 +32,8 @@
     <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
     <%- include("rubros") %> 
     <%- include("descuentos") %> 
+    <%- include("nivel") %> 
+    <%- include("tipoPrograma") %> 
     <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
     <div class="container animate__animated animate__bounceInUp">
       <div class="div_resize">
@@ -75,12 +77,6 @@
           </select>
         </div>
         <div class="div_resize">
-          <!-- menu -->
-        <button class="menu mainMenu icon-dot-3" id="menu_mes"></button>
-        <button class="menu menu_items btn_add icon-plus" id="btn_mes_add"></button> 
-        <button class="menu menu_items btn_update icon-arrows-cw" id="btn_mes_update"></button> 
-        <button class="menu menu_items btn_delete icon-trash-2" id="btn_mes_delete"></button>
-        <!--  -->
         <label id="mes_btn" class="L4 mainlabels" for="mes">MES</label>
         <select name="mes" id="mes" class="">
           <% mes.forEach(function (mes) { %>

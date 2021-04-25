@@ -1,9 +1,9 @@
-const Beneficiarios = require("../models/Beneficiarios");
+const Nivel = require("../models/Nivel");
 
-exports.addBeneficiario = function (req, res) {
-  let beneficiario = new Beneficiarios(req.body);
-  beneficiario
-    .addBeneficiario()
+exports.addNivel = function (req, res) {
+  let nivel = new Nivel(req.body);
+  nivel
+    .addNivel()
     .then(() => {
       req.flash("success", "¡Agregado con éxito!");
       req.session.save(() => res.redirect(`/`));
@@ -15,10 +15,10 @@ exports.addBeneficiario = function (req, res) {
     });
 };
 
-exports.updateBeneficiario = function (req, res) {
-  let beneficiario = new Beneficiarios(req.body, req.params);
-  beneficiario
-    .updateBeneficiario()
+exports.updateNivel = function (req, res) {
+  let nivel = new Nivel(req.body);
+  nivel
+    .updateNivel()
     .then(() => {
       req.flash("success", "¡Modificado con éxito!");
       req.session.save(() => res.redirect(`/`));
@@ -29,8 +29,8 @@ exports.updateBeneficiario = function (req, res) {
     });
 };
 
-exports.deleteBeneficiario = function (req, res) {
-  Beneficiarios.deleteBeneficiario(req.params.id)
+exports.deleteNivel = function (req, res) {
+  Nivel.deleteNivel(req.params.id)
     .then(() => {
       req.flash("success", "¡Eliminado con éxito!");
       req.session.save(() => res.redirect(`/`));

@@ -48,19 +48,19 @@ let rubroCrud = {
 };
 let nivelCrud = {
   menu: "#menu_nivel",
-  addForm: "#",
-  updateForm: "#",
-  deleteForm: "#",
+  addForm: "#addFormNivel",
+  updateForm: "#updateFormNivel",
+  deleteForm: "#deleteFormNivel",
   btnAdd: "#btn_nivel_add",
   btnUpdate: "#btn_nivel_update",
   btnDelete: "#btn_nivel_delete",
-  btnAddSave: "#",
-  btnAddCancel: "#",
-  btnUpdateSave: "#",
-  btnUpdateCancel: "#",
-  btnDelSave: "#",
-  btnDelCancel: "#",
-  focusInput:"#"
+  btnAddSave: "#btnSaveNivel",
+  btnAddCancel: "#btnCancelNivel",
+  btnUpdateSave: "#btnSaveNivelUpdate",
+  btnUpdateCancel: "#btnCancelNivelUpdate",
+  btnDelSave: "#btnSaveNivelDelete",
+  btnDelCancel: "#btnCancelNivelDelete",
+  focusInput:"#addNivelNro"
 };
 let benefCrud = {
   menu: "#menu_beneficiario",
@@ -80,35 +80,19 @@ let benefCrud = {
 };
 let tipoCrud = {
   menu: "#menu_tipo",
-  addForm: "#",
-  updateForm: "#",
-  deleteForm: "#",
+  addForm: "#addFormTipoPrograma",
+  updateForm: "#updateFormTipoPrograma",
+  deleteForm: "#deleteFormTipoPrograma",
   btnAdd: "#btn_tipo_add",
   btnUpdate: "#btn_tipo_update",
   btnDelete: "#btn_tipo_delete",
-  btnAddSave: "#",
-  btnAddCancel: "#",
-  btnUpdateSave: "#",
-  btnUpdateCancel: "#",
-  btnDelSave: "#",
-  btnDelCancel: "#",
-  focusInput:"#"
-};
-let mesCrud = {
-  menu: "#menu_mes",
-  addForm: "#",
-  updateForm: "#",
-  deleteForm: "#",
-  btnAdd: "#btn_mes_add",
-  btnUpdate: "#btn_mes_update",
-  btnDelete: "#btn_mes_delete",
-  btnAddSave: "#",
-  btnAddCancel: "#",
-  btnUpdateSave: "#",
-  btnUpdateCancel: "#",
-  btnDelSave: "#",
-  btnDelCancel: "#",
-  focusInput:"#"
+  btnAddSave: "#btnSaveTipoPrograma",
+  btnAddCancel: "#btnCancelTipoPrograma",
+  btnUpdateSave: "#btnSaveTipoProgramaUpdate",
+  btnUpdateCancel: "#btnCancelTipoProgramaUpdate",
+  btnDelSave: "#btnSaveTipoProgramaDelete",
+  btnDelCancel: "#btnCancelTipoProgramaDelete",
+  focusInput:"#addTipoNro"
 };
 
 document.querySelector("#rubro_nro").value = "";
@@ -131,13 +115,19 @@ setTimeout(() => {
 export default class rubros {
   constructor() {
     this.events();
-    this.preventEnterSend([rubroCrud, benefCrud]);  
+    this.preventEnterSend([rubroCrud, benefCrud, nivelCrud, tipoCrud]);  
     this.openCrudForm("rubro", rubroCrud);
     this.openCrudForm("beneficiario", benefCrud);
+    this.openCrudForm("nivel", nivelCrud);
+    this.openCrudForm("tipo", tipoCrud);
+    this.exportNivel();
+    this.exportTipoPrograma()
   }
 
   // events
   events() {
+    
+
     // prevent from sending form data when pressing Enter key
     document
       .querySelector("#addRubroNro")
@@ -255,9 +245,6 @@ export default class rubros {
     btnTipo.addEventListener("click", () => {
       this.expandMenu(tipoCrud);
     });
-    btnMes.addEventListener("click", () => {
-      this.expandMenu(mesCrud);
-    });
 
     // menu hover options
     rubroLabel.addEventListener("mouseover", () => {
@@ -280,16 +267,73 @@ export default class rubros {
       this.showMenu("tipo");
     });
 
-    mesLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu();
-      this.showMenu("mes");
-    });
- 
-
     // end of events
   }
 
   // methods
+  exportNivel(){
+    
+    let table = document.querySelector("#updateNivelTable")
+    for (let i = 1; i < table.rows.length; i++) {
+      table.rows[i].onclick = function () {
+        if (table.rows[i].cells[1].innerText.length > 39) {
+          document.querySelector("#updateNivelDescri").style.width = "100%";
+        } else {
+          document.querySelector("#updateNivelDescri").style.width = "auto";
+        }
+        document.querySelector("#updateNivelNro").value = table.rows[i].cells[0].innerText
+        document.querySelector("#updateNivelDescri").value = table.rows[i].cells[1].innerText
+      }
+    }
+
+    let table2 = document.querySelector("#deleteNivelTable")
+    for (let j = 1; j < table2.rows.length; j++) {
+      table2.rows[j].onclick = function () {
+        if (table2.rows[j].cells[1].innerText.length > 39) {
+          document.querySelector("#delNivelDescri").style.width = "100%";
+        } else {
+          document.querySelector("#delNivelDescri").style.width = "auto";
+        }
+        document.querySelector("#delNivelNro").value = table2.rows[j].cells[0].innerText
+        document.querySelector("#delNivelDescri").value = table2.rows[j].cells[1].innerText
+        document.querySelector(nivelCrud.deleteForm).setAttribute("action", `/deleteNivel/${table2.rows[j].cells[0].innerText}`);
+      }
+    }
+  }
+
+  exportTipoPrograma(){
+    let table = document.querySelector("#updateTipoTable")
+    for (let i = 1; i < table.rows.length; i++) {
+      table.rows[i].onclick = function () {
+        if (table.rows[i].cells[1].innerText.length > 39) {
+          document.querySelector("#updateTipoProgramaNroDescri").style.width = "100%";
+        } else {
+          document.querySelector("#updateTipoProgramaNroDescri").style.width = "auto";
+        }
+        document.querySelector("#updateTipoNro").value = table.rows[i].cells[0].innerText
+        document.querySelector("#updateProgramaNro").value = table.rows[i].cells[1].innerText
+        document.querySelector("#updateTipoProgramaNroDescri").value = table.rows[i].cells[2].innerText
+      }
+    }
+
+    table = document.querySelector("#deleteTipoTable")
+    for (let i = 1; i < table.rows.length; i++) {
+      table.rows[i].onclick = function () {
+        if (table.rows[i].cells[1].innerText.length > 39) {
+          document.querySelector("#delTipoProgramaNroDescri").style.width = "100%";
+        } else {
+          document.querySelector("#delTipoProgramaNroDescri").style.width = "auto";
+        }
+        document.querySelector("#delTipoNro").value = table.rows[i].cells[0].innerText
+        document.querySelector("#delProgramaNro").value = table.rows[i].cells[1].innerText
+        document.querySelector("#delTipoProgramaNroDescri").value = table.rows[i].cells[2].innerText
+        document.querySelector(tipoCrud.deleteForm).setAttribute("action", 
+        `/deleteTipoPrograma/${table.rows[i].cells[0].innerText}/${table.rows[i].cells[1].innerText}`);
+      }
+    }
+
+  }
+
   openCrudForm(type, form){
     let emptyCheck
   
@@ -335,6 +379,9 @@ export default class rubros {
                 emptyCheck.classList.remove("errorShadow");
               }, 3000);
             }
+          }else{
+            document.querySelector(form.updateForm).style.display = "flex";
+            document.querySelector(form.menu).click();
           }                 
       });
     document
@@ -373,7 +420,10 @@ export default class rubros {
             emptyCheck.classList.remove("errorShadow");
           }, 3000);
         }
-      }
+      }else{
+        document.querySelector(form.deleteForm).style.display = "flex";
+        document.querySelector(form.menu).click();
+      }   
       });
     document
       .querySelector(form.btnDelCancel)
@@ -427,10 +477,6 @@ export default class rubros {
 
       case "tipo":
         menu = tipoCrud.menu;
-        break;
-
-      case "mes":
-        menu = mesCrud.menu;
         break;
     }
 

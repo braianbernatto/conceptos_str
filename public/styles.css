@@ -399,3 +399,72 @@ footer {
   align-content: center;
   margin: 0 auto;
 }
+
+table{
+  border-collapse: collapse;
+  color: #777;
+  width: 100%;
+  border-spacing: 0;
+  border-bottom: 1px solid #ecf0f1;
+  border-top: 1px solid #ecf0f1;
+}
+
+table th{
+  text-align: left;
+  background-color: #fff;
+  color: #777;
+  padding: 4px 8px;
+  border: 1px solid #ecf0f1;
+}
+
+table tr:hover{
+  background-color: rgb(158, 201, 158);
+  color: #fff;
+}
+
+thead, tbody{
+  display: block;
+}
+
+tbody{
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: auto;
+}
+
+.tbNivel td:first-child{
+  text-align: center;
+  width: 9%;
+}
+.tbNivel td:last-child{
+  width: 70%;
+}
+
+.tbTipo td{
+  text-align: center;
+  width: 1%;
+}
+.tbTipo td:last-child{
+  text-align: left;
+  width: 90%;
+}
+
+table td{
+  border: 1px solid #ecf0f1;
+  padding: 4px 8px;
+}
+
+
+
+#deleteFormNivel{
+  display: flex;
+}
+
+/* #updateFormNivel{
+  display: flex;
+} */
+
+/* #updateFormTipoPrograma{
+  display: flex;
+} */

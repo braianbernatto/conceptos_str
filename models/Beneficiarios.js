@@ -57,8 +57,8 @@ Beneficiario.prototype.addBeneficiario = function () {
     if (!this.errors.length) {
       try {
         beneficiario = await pool.query(
-            `insert into descuentos (desc_cod, desc_beneficiario) values ((select max(desc_cod)+1 as new from descuentos), '${this.data.BenefDescri}')`
-          );
+          `insert into descuentos (desc_cod, desc_beneficiario) values ((select max(desc_cod)+1 as new from descuentos), '${this.data.BenefDescri}')`
+        );
         resolve(beneficiario);
       } catch (e) {
         this.errors.push("Please try again later :)");
@@ -71,5 +71,40 @@ Beneficiario.prototype.addBeneficiario = function () {
   });
 };
 
+Beneficiario.deleteBeneficiario = function (id) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await pool.query(`delete from descuentos where desc_cod =  ${id}`);
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+Beneficiario.prototype.updateBeneficiario = function () {
+  return new Promise(async (resolve, reject) => {
+    // first clean and validate data
+    this.cleanUp();
+    this.validate();
+    await this.isUnique();
+
+    // only if there are no errors proceedo to save into the database
+    if (!this.errors.length) {
+      try {
+        let beneficiario = await pool.query(
+          `update descuentos set desc_beneficiario = '${this.data.BenefDescri}'
+            where desc_cod = ${this.params.id}`
+        );
+        resolve(beneficiario);
+      } catch {
+        this.errors.push("Please try again later :)");
+        reject(this.errors);
+      }
+    } else {
+      reject(this.errors);
+    }
+  });
+};
 
 module.exports = Beneficiario;
