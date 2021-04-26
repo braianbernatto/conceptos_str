@@ -44,7 +44,7 @@ let rubroCrud = {
   btnUpdateCancel: "#btnCancelRubroUpdate",
   btnDelSave: "#btnSaveRubroDelete",
   btnDelCancel: "#btnCancelRubroDelete",
-  focusInput:"#addRubroNro",
+  focusInput: "#addRubroNro",
 };
 let nivelCrud = {
   menu: "#menu_nivel",
@@ -60,7 +60,7 @@ let nivelCrud = {
   btnUpdateCancel: "#btnCancelNivelUpdate",
   btnDelSave: "#btnSaveNivelDelete",
   btnDelCancel: "#btnCancelNivelDelete",
-  focusInput:"#addNivelNro"
+  focusInput: "#addNivelNro"
 };
 let benefCrud = {
   menu: "#menu_beneficiario",
@@ -76,7 +76,7 @@ let benefCrud = {
   btnUpdateCancel: "#btnCancelBenefUpdate",
   btnDelSave: "#btnSaveBenefDelete",
   btnDelCancel: "#btnCancelBenefDelete",
-  focusInput:"#addBenefDescri"
+  focusInput: "#addBenefDescri"
 };
 let tipoCrud = {
   menu: "#menu_tipo",
@@ -92,7 +92,7 @@ let tipoCrud = {
   btnUpdateCancel: "#btnCancelTipoProgramaUpdate",
   btnDelSave: "#btnSaveTipoProgramaDelete",
   btnDelCancel: "#btnCancelTipoProgramaDelete",
-  focusInput:"#addTipoNro"
+  focusInput: "#addTipoNro"
 };
 
 document.querySelector("#rubro_nro").value = "";
@@ -115,7 +115,7 @@ setTimeout(() => {
 export default class rubros {
   constructor() {
     this.events();
-    this.preventEnterSend([rubroCrud, benefCrud, nivelCrud, tipoCrud]);  
+    this.preventEnterSend([rubroCrud, benefCrud, nivelCrud, tipoCrud]);
     this.openCrudForm("rubro", rubroCrud);
     this.openCrudForm("beneficiario", benefCrud);
     this.openCrudForm("nivel", nivelCrud);
@@ -126,7 +126,7 @@ export default class rubros {
 
   // events
   events() {
-    
+
 
     // prevent from sending form data when pressing Enter key
     document
@@ -248,22 +248,22 @@ export default class rubros {
 
     // menu hover options
     rubroLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu();
+      this.closeAllMenu(rubroCrud);
       this.showMenu("rubro");
     });
 
     nivelLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu();
+      this.closeAllMenu(nivelCrud);
       this.showMenu("nivel");
     });
 
     descuentoLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu();
+      this.closeAllMenu(benefCrud);
       this.showMenu("descuento");
     });
 
     tipoLabel.addEventListener("mouseover", () => {
-      this.closeAllMenu();
+      this.closeAllMenu(tipoCrud);
       this.showMenu("tipo");
     });
 
@@ -271,8 +271,8 @@ export default class rubros {
   }
 
   // methods
-  exportNivel(){
-    
+  exportNivel() {
+
     let table = document.querySelector("#updateNivelTable")
     for (let i = 1; i < table.rows.length; i++) {
       table.rows[i].onclick = function () {
@@ -301,7 +301,7 @@ export default class rubros {
     }
   }
 
-  exportTipoPrograma(){
+  exportTipoPrograma() {
     let table = document.querySelector("#updateTipoTable")
     for (let i = 1; i < table.rows.length; i++) {
       table.rows[i].onclick = function () {
@@ -327,38 +327,38 @@ export default class rubros {
         document.querySelector("#delTipoNro").value = table.rows[i].cells[0].innerText
         document.querySelector("#delProgramaNro").value = table.rows[i].cells[1].innerText
         document.querySelector("#delTipoProgramaNroDescri").value = table.rows[i].cells[2].innerText
-        document.querySelector(tipoCrud.deleteForm).setAttribute("action", 
-        `/deleteTipoPrograma/${table.rows[i].cells[0].innerText}/${table.rows[i].cells[1].innerText}`);
+        document.querySelector(tipoCrud.deleteForm).setAttribute("action",
+          `/deleteTipoPrograma/${table.rows[i].cells[0].innerText}/${table.rows[i].cells[1].innerText}`);
       }
     }
 
   }
 
-  openCrudForm(type, form){
+  openCrudForm(type, form) {
     let emptyCheck
-  
-     // mostrar u ocultar add
-     document.querySelector(form.btnAdd).addEventListener("click", () => {
+
+    // mostrar u ocultar add
+    document.querySelector(form.btnAdd).addEventListener("click", () => {
       document.querySelector(form.addForm).style.display = "flex";
       document.querySelector(form.menu).click();
-      document.querySelector(form.focusInput).focus();      
+      document.querySelector(form.focusInput).focus();
     });
     document.querySelector(form.btnAddCancel).addEventListener("click", () => {
-        document.querySelector(form.addForm).style.display = "none";
-      });
+      document.querySelector(form.addForm).style.display = "none";
+    });
 
     // mostrar u ocultar update
     document
       .querySelector(form.btnUpdate)
       .addEventListener("click", () => {
-      // rubro
+        // rubro
         if (type == "rubro") {
           emptyCheck = rubroNro
           if (emptyCheck.value.trim() != "") {
-            this.exportData(type,"update",form.updateForm);
+            this.exportData(type, "update", form.updateForm);
             document.querySelector(form.updateForm).style.display = "flex";
             document.querySelector(form.menu).click();
-          }else {
+          } else {
             emptyCheck.classList.add("errorShadow");
             emptyCheck.focus();
             setTimeout(() => {
@@ -366,64 +366,64 @@ export default class rubros {
             }, 3000);
           }
           // beneficiario
-        }else if(type == "beneficiario") {
+        } else if (type == "beneficiario") {
           emptyCheck = benefSelect
-            if (emptyCheck.value != "0") {
-              this.exportData(type,"update",form.updateForm);
-              document.querySelector(form.updateForm).style.display = "flex";
-              document.querySelector(form.menu).click();
-            }else {
-              emptyCheck.classList.add("errorShadow");
-              emptyCheck.focus();
-              setTimeout(() => {
-                emptyCheck.classList.remove("errorShadow");
-              }, 3000);
-            }
-          }else{
+          if (emptyCheck.value != "0") {
+            this.exportData(type, "update", form.updateForm);
             document.querySelector(form.updateForm).style.display = "flex";
             document.querySelector(form.menu).click();
-          }                 
+          } else {
+            emptyCheck.classList.add("errorShadow");
+            emptyCheck.focus();
+            setTimeout(() => {
+              emptyCheck.classList.remove("errorShadow");
+            }, 3000);
+          }
+        } else {
+          document.querySelector(form.updateForm).style.display = "flex";
+          document.querySelector(form.menu).click();
+        }
       });
     document
       .querySelector(form.btnUpdateCancel)
       .addEventListener("click", () => {
         document.querySelector(form.updateForm).style.display = "none";
       });
-  
+
     // mostrar u ocultar delete
     document
       .querySelector(form.btnDelete)
       .addEventListener("click", () => {
         if (type == "rubro") {
           emptyCheck = rubroNro
-        if (emptyCheck.value.trim() != "") {
-          this.exportData(type,"del", form.deleteForm);
+          if (emptyCheck.value.trim() != "") {
+            this.exportData(type, "del", form.deleteForm);
+            document.querySelector(form.deleteForm).style.display = "flex";
+            document.querySelector(form.menu).click();
+          } else {
+            emptyCheck.classList.add("errorShadow");
+            emptyCheck.focus();
+            setTimeout(() => {
+              emptyCheck.classList.remove("errorShadow");
+            }, 3000);
+          }
+        } else if (type == "beneficiario") {
+          emptyCheck = benefSelect
+          if (emptyCheck.value != "0") {
+            this.exportData(type, "del", form.deleteForm);
+            document.querySelector(form.deleteForm).style.display = "flex";
+            document.querySelector(form.menu).click();
+          } else {
+            emptyCheck.classList.add("errorShadow");
+            emptyCheck.focus();
+            setTimeout(() => {
+              emptyCheck.classList.remove("errorShadow");
+            }, 3000);
+          }
+        } else {
           document.querySelector(form.deleteForm).style.display = "flex";
           document.querySelector(form.menu).click();
-        } else {
-          emptyCheck.classList.add("errorShadow");
-          emptyCheck.focus();
-          setTimeout(() => {
-            emptyCheck.classList.remove("errorShadow");
-          }, 3000);
         }
-      }else if(type == "beneficiario"){
-        emptyCheck = benefSelect
-        if (emptyCheck.value != "0") {
-          this.exportData(type,"del", form.deleteForm);
-          document.querySelector(form.deleteForm).style.display = "flex";
-          document.querySelector(form.menu).click();
-        } else {
-          emptyCheck.classList.add("errorShadow");
-          emptyCheck.focus();
-          setTimeout(() => {
-            emptyCheck.classList.remove("errorShadow");
-          }, 3000);
-        }
-      }else{
-        document.querySelector(form.deleteForm).style.display = "flex";
-        document.querySelector(form.menu).click();
-      }   
       });
     document
       .querySelector(form.btnDelCancel)
@@ -453,10 +453,16 @@ export default class rubros {
     });
   }
 
-  closeAllMenu() {
-    buttonFlag = 0;
-    for (let i = 0; i < document.querySelectorAll(".menu").length; i++) {
-      document.querySelectorAll(".menu")[i].style.display = "none";
+  closeAllMenu(menu) {
+    let id = window.setTimeout(function () { }, 0);
+    while (id--) {
+      window.clearTimeout(id); // will do nothing if no timeout with id is present
+    }
+    if (document.querySelector(menu.btnAdd).style.display != "flex") {
+      buttonFlag = 0;
+      for (let i = 0; i < document.querySelectorAll(".menu").length; i++) {
+        document.querySelectorAll(".menu")[i].style.display = "none";
+      }
     }
   }
 
@@ -518,7 +524,7 @@ export default class rubros {
         document.querySelector(menu.btnAdd).style.display = "none";
         document.querySelector(menu.btnUpdate).style.display = "none";
         document.querySelector(menu.btnDelete).style.display = "none";
-      }, 200);
+      }, 50);
       setTimeout(() => {
         if (
           document.querySelector(menu.btnUpdate).style.display == "none" &&
@@ -534,58 +540,58 @@ export default class rubros {
   exportData(type, action, form) {
     switch (type) {
       case "rubro":
-              let rubro = document.getElementById("rubro_nro");
-              let rubroDescri = document.getElementById("rubro_detalle");
-              let nivel = document.getElementById("nivel");
+        let rubro = document.getElementById("rubro_nro");
+        let rubroDescri = document.getElementById("rubro_detalle");
+        let nivel = document.getElementById("nivel");
 
-              let exRubro = document.getElementById(`${action}RubroNro`);
-              let exRubroDescri = document.getElementById(`${action}RubroDescri`);
-              let exNivel = "";
-              let id2 = "";
-              
-              exRubro.value = rubro.value;
-              exRubroDescri.value = rubroDescri.value;
+        let exRubro = document.getElementById(`${action}RubroNro`);
+        let exRubroDescri = document.getElementById(`${action}RubroDescri`);
+        let exNivel = "";
+        let id2 = "";
 
-              id2 = rubroDescri.options[rubroDescri.selectedIndex].getAttribute("id2");
+        exRubro.value = rubro.value;
+        exRubroDescri.value = rubroDescri.value;
 
-              if (exRubroDescri.value.length > 39) {
-                exRubroDescri.style.width = "100%";
-              } else {
-                exRubroDescri.style.width = "auto";
-              }
+        id2 = rubroDescri.options[rubroDescri.selectedIndex].getAttribute("id2");
 
-              if (action == "update") {
-                // only when is update there's need for export nivel
-                exNivel = document.getElementById(`${action}NivelRubro`);
-                exNivel.value = nivel.value;
-                // 
-                document.querySelector(form).setAttribute("action", `/updateRubro/${id2}`);
-              }
-              if (action == "del") {
-                document.querySelector(form).setAttribute("action", `/deleteRubro/${id2}`);
-              }
+        if (exRubroDescri.value.length > 39) {
+          exRubroDescri.style.width = "100%";
+        } else {
+          exRubroDescri.style.width = "auto";
+        }
+
+        if (action == "update") {
+          // only when is update there's need for export nivel
+          exNivel = document.getElementById(`${action}NivelRubro`);
+          exNivel.value = nivel.value;
+          // 
+          document.querySelector(form).setAttribute("action", `/updateRubro/${id2}`);
+        }
+        if (action == "del") {
+          document.querySelector(form).setAttribute("action", `/deleteRubro/${id2}`);
+        }
         break;
-    
+
       case "beneficiario":
 
-              let exBenef = document.getElementById(`${action}BenefDescri`);
-              let id = "";
-              
-              exBenef.value = benefSelect.value;
-              id = benefSelect.options[benefSelect.selectedIndex].getAttribute("id");
+        let exBenef = document.getElementById(`${action}BenefDescri`);
+        let id = "";
 
-              if (exBenef.value.length > 39) {
-                exBenef.style.width = "100%";
-              } else {
-                exBenef.style.width = "auto";
-              }
+        exBenef.value = benefSelect.value;
+        id = benefSelect.options[benefSelect.selectedIndex].getAttribute("id");
 
-              if (action == "update") {
-                document.querySelector(form).setAttribute("action", `/updateBeneficiario/${id}`);
-              }
-              if (action == "del") {
-                document.querySelector(form).setAttribute("action", `/deleteBeneficiario/${id}`);
-              }
+        if (exBenef.value.length > 39) {
+          exBenef.style.width = "100%";
+        } else {
+          exBenef.style.width = "auto";
+        }
+
+        if (action == "update") {
+          document.querySelector(form).setAttribute("action", `/updateBeneficiario/${id}`);
+        }
+        if (action == "del") {
+          document.querySelector(form).setAttribute("action", `/deleteBeneficiario/${id}`);
+        }
         break;
     }
   }

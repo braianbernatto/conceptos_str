@@ -40,7 +40,7 @@ TipoPrograma.prototype.cleanUp = function () {
   };
 };
 
-TipoPrograma.prototype.validate = function (action) {
+TipoPrograma.prototype.validate = function () {
   this.data.val = true;
   if (this.data.tipoNro == "") {
     this.errors.push("Te faltó cargar tipo");
@@ -56,8 +56,8 @@ TipoPrograma.prototype.validate = function (action) {
   if (this.data.programaNro != "" && !validator.isInt(this.data.programaNro)) {
     this.errors.push("Programa solo acepta datos numéricos");
   }
-  if (this.data.rubroDescri == "") {
-    this.errors.push("Te faltó cargar la descripción del rubro");
+  if (this.data.programaDescri == "") {
+    this.errors.push("Te faltó cargar la descripción del tipo programa");
   }
 };
 
