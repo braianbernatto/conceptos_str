@@ -452,12 +452,16 @@ export default class rubros {
         });
     });
   }
-
-  closeAllMenu(menu) {
+  
+  clearTimeOuts(){
     let id = window.setTimeout(function () { }, 0);
     while (id--) {
       window.clearTimeout(id); // will do nothing if no timeout with id is present
     }
+  }
+
+  closeAllMenu(menu) {
+    this.clearTimeOuts()
     if (document.querySelector(menu.btnAdd).style.display != "flex") {
       buttonFlag = 0;
       for (let i = 0; i < document.querySelectorAll(".menu").length; i++) {
