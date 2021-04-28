@@ -21,10 +21,10 @@ let rubroLabel = document.querySelector("#rubro_btn");
 let nivelLabel = document.querySelector("#nivel_btn");
 let descuentoLabel = document.querySelector("#beneficiario_btn");
 let tipoLabel = document.querySelector("#tipo_btn");
-let mesLabel = document.querySelector("#mes_btn");
 
 let rubroAnterior = "";
 let buttonFlag = 0;
+let timeOutRed = [];
 
 final.value = "";
 nivel.value = "";
@@ -249,22 +249,22 @@ export default class rubros {
     // menu hover options
     rubroLabel.addEventListener("mouseover", () => {
       this.closeAllMenu(rubroCrud);
-      this.showMenu("rubro");
+      this.showMenu(rubroCrud);
     });
 
     nivelLabel.addEventListener("mouseover", () => {
       this.closeAllMenu(nivelCrud);
-      this.showMenu("nivel");
+      this.showMenu(nivelCrud);
     });
 
     descuentoLabel.addEventListener("mouseover", () => {
       this.closeAllMenu(benefCrud);
-      this.showMenu("descuento");
+      this.showMenu(benefCrud);
     });
 
     tipoLabel.addEventListener("mouseover", () => {
       this.closeAllMenu(tipoCrud);
-      this.showMenu("tipo");
+      this.showMenu(tipoCrud);
     });
 
     // end of events
@@ -361,7 +361,7 @@ export default class rubros {
           } else {
             emptyCheck.classList.add("errorShadow");
             emptyCheck.focus();
-            setTimeout(() => {
+            timeOutRed[0] = setTimeout(() => {        
               emptyCheck.classList.remove("errorShadow");
             }, 3000);
           }
@@ -375,7 +375,7 @@ export default class rubros {
           } else {
             emptyCheck.classList.add("errorShadow");
             emptyCheck.focus();
-            setTimeout(() => {
+            timeOutRed[1] = setTimeout(() => {
               emptyCheck.classList.remove("errorShadow");
             }, 3000);
           }
@@ -403,7 +403,7 @@ export default class rubros {
           } else {
             emptyCheck.classList.add("errorShadow");
             emptyCheck.focus();
-            setTimeout(() => {
+            timeOutRed[2] = setTimeout(() => {
               emptyCheck.classList.remove("errorShadow");
             }, 3000);
           }
@@ -416,7 +416,7 @@ export default class rubros {
           } else {
             emptyCheck.classList.add("errorShadow");
             emptyCheck.focus();
-            setTimeout(() => {
+            timeOutRed[3] = setTimeout(() => {
               emptyCheck.classList.remove("errorShadow");
             }, 3000);
           }
@@ -456,7 +456,10 @@ export default class rubros {
   clearTimeOuts(){
     let id = window.setTimeout(function () { }, 0);
     while (id--) {
-      window.clearTimeout(id); // will do nothing if no timeout with id is present
+      // clear all timeOuts that are not in the exceptions array
+      if(!timeOutRed.includes(id)){
+        window.clearTimeout(id); // will do nothing if no timeout with id is present
+      } 
     }
   }
 
@@ -470,34 +473,14 @@ export default class rubros {
     }
   }
 
-  showMenu(type) {
-    let menu;
-    switch (type) {
-      case "rubro":
-        menu = rubroCrud.menu;
-        break;
-
-      case "nivel":
-        menu = nivelCrud.menu;
-        break;
-
-      case "descuento":
-        menu = benefCrud.menu;
-        break;
-
-      case "tipo":
-        menu = tipoCrud.menu;
-        break;
-    }
-
-    if (document.querySelector(menu).style.display != "flex") {
-      document.querySelector(menu).style.display = "flex";
-      // setTimeout(() => {
-      //  if (document.querySelector(menuItem+"update").style.display != "flex"
-      //  && document.querySelector(menu).style.display == "flex") {
-      //   document.querySelector(menu).style.display = "none";
-      //  }
-      // }, 3000);
+  showMenu(menu) {
+    if (document.querySelector(menu.menu).style.display != "flex") {
+      document.querySelector(menu.menu).style.display = "flex";
+      setTimeout(() => {
+       if (document.querySelector(menu.btnAdd).style.display != "flex") {
+        document.querySelector(menu.menu).style.display = "none";
+       }
+      }, 3000);
     }
   }
 
