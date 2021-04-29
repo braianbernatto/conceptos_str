@@ -439,7 +439,12 @@ table td{
   padding: 4px 8px;
 }
 
-
+.addForm .L1, .updateForm .L1, .deleteForm .L1 {
+  margin-right: 5px;
+}
+.addForm .L2, .updateForm .L2 {
+  margin-right: 18px;
+}
 
 /* #deleteFormNivel{
   display: flex;
