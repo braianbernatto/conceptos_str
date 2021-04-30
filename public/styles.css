@@ -135,6 +135,23 @@ button {
   background-color: rgba(255, 255, 255, 0.171);
 
 }
+
+.login{
+  max-width: 400px;
+}
+
+.login .menuLogin{
+  display: flex;
+  position: relative;
+}
+
+.menuLogout{
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .addForm, .updateForm, .deleteForm{  
   display: none;
   flex-direction: column;
@@ -172,7 +189,7 @@ input{
   -moz-box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.75);
 }
-select, option, button {
+select, option, button, .btn .logout {
   text-align-last: center;
   align-self: start;
   font-size: 20px;
@@ -280,7 +297,7 @@ footer {
 #rubro_nro {
   margin-right: 6px;
 }
-.menu{
+.menu, .menuLogin, .menuLogout{
   display: flex;
   flex-direction: row;
   justify-content: center;

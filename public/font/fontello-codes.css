@@ -16,6 +16,14 @@
 .icon-cog-alt:before { content: '\e80e'; } /* '' */
 .icon-left-open:before { content: '\e80f'; } /* '' */
 .icon-off:before { content: '\e810'; } /* '' */
-.icon-spin3:before { content: '\e832'; } /* '' */
+.icon-key:before { content: '\e811'; } /* '' */
+.icon-user:before { content: '\e812'; } /* '' */
+.icon-lock-open:before { content: '\e813'; } /* '' */
+.icon-lock-1:before { content: '\e814'; } /* '' */
+.icon-lock-open-alt:before { content: '\f075'; } /* '' */
 .icon-trash-2:before { content: '\f083'; } /* '' */
 .icon-sliders:before { content: '\f1de'; } /* '' */
+.icon-user-circle-o:before { content: '\f2be'; } /* '' */
+.icon-lock-alt:before { content: '\f510'; } /* '' */
+.icon-lock:before { content: '\f512'; } /* '' */
+.icon-lock-open-1:before { content: '\f513'; } /* '' */

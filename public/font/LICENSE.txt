@@ -55,12 +55,12 @@ Font license info
    Homepage:  http://www.mfglabs.com/
 
 
-## Fontelico
+## Web Symbols
 
-   Copyright (C) 2012 by Fontello project
+   Copyright (c) 2011 by Just Be Nice studio. All rights reserved.
 
-   Author:    Crowdsourced, for Fontello project
+   Author:    Just Be Nice studio
    License:   SIL (http://scripts.sil.org/OFL)
-   Homepage:  http://fontello.com
+   Homepage:  http://www.justbenicestudio.com/
 
 
