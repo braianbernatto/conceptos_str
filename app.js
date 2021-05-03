@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const csrf = require("csurf")
 const cors = require("cors")
 const flash = require("connect-flash")
 const session = require("express-session")
@@ -20,7 +21,6 @@ let sessionOptions = session({
     cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true}    
 })
 
-// app.set('trust proxy', 1) // trust first proxy
 app.use(sessionOptions)
 app.use(flash())
 
@@ -42,6 +42,25 @@ app.use(express.static("public"))
 app.set("views", "views")
 app.set("view engine", "ejs")
 
+app.use(csrf())
+
+app.use(function (req, res, next) {
+    res.locals.csrfToken = req.csrfToken()
+    next()
+})
+
 app.use("/", router)
+
+app.use(function (err, req, res, next) {
+    if (err) {
+        if (err.code == "EBADCSRFTOKEN") {            
+            req.flash("errors", "Cross site request forgery detected")
+            req.session.save(() => res.redirect("/login1"))
+        }else{
+            req.flash("errors", "Please try again later")
+        }
+    }
+})
+
 
 module.exports = app

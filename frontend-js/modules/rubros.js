@@ -114,6 +114,7 @@ setTimeout(() => {
 
 export default class rubros {
   constructor() {
+    this._csrf = document.querySelector("[name='_csrf']").value
     this.events();
     this.preventEnterSend([rubroCrud, benefCrud, nivelCrud, tipoCrud]);
     this.openCrudForm("rubro", rubroCrud);
@@ -126,8 +127,6 @@ export default class rubros {
 
   // events
   events() {
-
-
     // prevent from sending form data when pressing Enter key
     document
       .querySelector("#addRubroNro")
@@ -168,8 +167,32 @@ export default class rubros {
     });
 
     // auto relleno de tipo programa
-    tipo.addEventListener("focusout", this.tipoPrograma);
-    programa.addEventListener("focusout", this.tipoPrograma);
+    tipo.addEventListener("blur", ()=> {
+      if (tipo.value.trim() != "" && programa.value.trim() != "") {
+        axios
+        .post(`/tipoPrograma`, {_csrf: this._csrf, tipo: document.querySelector("#tipo").value,
+        programa: document.querySelector("#programa").value})
+      .then((response) => {
+        programa_detalle.value = response.data[0].prog_descri;
+          })
+          .catch(() => {
+            programa_detalle.value = "";
+          });
+      }
+    });
+    programa.addEventListener("blur", ()=> {
+      if (tipo.value.trim() != "" && programa.value.trim() != "") {
+        axios
+        .post(`/tipoPrograma`, {_csrf: this._csrf, tipo: document.querySelector("#tipo").value,
+        programa: document.querySelector("#programa").value})
+      .then((response) => {
+        programa_detalle.value = response.data[0].prog_descri;
+          })
+          .catch(() => {
+            programa_detalle.value = "";
+          });
+      }
+    });
 
     rubroNro.addEventListener("keyup", function (event) {
       // Number 13 is the "Enter" key on the keyboard
@@ -183,9 +206,40 @@ export default class rubros {
 
     btnOk.addEventListener("click", this.copiar);
 
-    btnCaja.addEventListener("click", this.cajaChica);
+    btnCaja.addEventListener("click", ()=> {
+      rubroNro.focus();
+      rubroNro.value = 0;
+      nivel.value = 0;
+      axios
+        .post(`/rubrosByNro`, {_csrf: this._csrf, nro: 0 })
+        .then((response) => {
+          final.value = response.data[0].rub_descri;
+          /* Select the text field */
+          final.select();
+          /* Copy the text inside the text field */
+          document.execCommand("copy");
+  
+          rubroNro.select();
+        })
+        .catch(() => {
+          final.value = "No hay datos de caja chica";
+        });
+    });
 
-    btnCaja.addEventListener("click", this.nivel);
+    btnCaja.addEventListener("click", ()=> {
+      if (nivel.value != "") {
+        axios
+          .post(`/nivelById`, {_csrf: this._csrf, id: document.querySelector("#nivel").value})
+          .then((response) => {
+            nivelDescri.value = response.data[0].nivel_descri;
+          })
+          .catch(() => {
+            final.value = "No recibió parámetro...";
+          });
+      } else {
+        console.log("nivel está vacío");
+      }
+    });
 
     // enter para tipo programa
     tipo.addEventListener("keyup", function (event) {
@@ -591,7 +645,7 @@ export default class rubros {
   nivel() {
     if (nivel.value != "") {
       axios
-        .post(`/nivelById`, { id: document.querySelector("#nivel").value })
+        .post(`/nivelById`, {_csrf: this._csrf, id: document.querySelector("#nivel").value})
         .then((response) => {
           nivelDescri.value = response.data[0].nivel_descri;
         })
@@ -618,7 +672,7 @@ export default class rubros {
 
   injectHTML() {
     axios
-      .post(`/rubrosByNro`, { nro: document.querySelector("#rubro_nro").value })
+      .post(`/rubrosByNro`, {_csrf: this._csrf, nro: document.querySelector("#rubro_nro").value })
       .then((response) => {
         nivel.value = response.data[0].nivel_cod;
         for (let i = 0; i < response.data.length; i++) {
@@ -639,41 +693,43 @@ export default class rubros {
       });
   }
 
-  cajaChica() {
-    rubroNro.focus();
-    rubroNro.value = 0;
-    nivel.value = 0;
-    axios
-      .post(`/rubrosByNro`, { nro: 0 })
-      .then((response) => {
-        final.value = response.data[0].rub_descri;
-        /* Select the text field */
-        final.select();
-        /* Copy the text inside the text field */
-        document.execCommand("copy");
+  // cajaChica() {
+  //   rubroNro.focus();
+  //   rubroNro.value = 0;
+  //   nivel.value = 0;
+  //   axios
+  //     .post(`/rubrosByNro`, {_csrf: this._csrf, nro: 0 })
+  //     .then((response) => {
+  //       final.value = response.data[0].rub_descri;
+  //       /* Select the text field */
+  //       final.select();
+  //       /* Copy the text inside the text field */
+  //       document.execCommand("copy");
 
-        rubroNro.select();
-      })
-      .catch(() => {
-        final.value = "No hay datos de caja chica";
-      });
-  }
+  //       rubroNro.select();
+  //     })
+  //     .catch(() => {
+  //       final.value = "No hay datos de caja chica";
+  //     });
+  // }
 
-  tipoPrograma() {
-    if (tipo.value.trim() != "" && programa.value.trim() != "") {
-      axios
-        .post(`/tipoPrograma`, {
-          tipo: document.querySelector("#tipo").value,
-          programa: document.querySelector("#programa").value,
-        })
-        .then((response) => {
-          programa_detalle.value = response.data[0].prog_descri;
-        })
-        .catch(() => {
-          programa_detalle.value = "";
-        });
-    }
-  }
+  // tipoPrograma() {
+  //   if (tipo.value.trim() != "" && programa.value.trim() != "") {
+  //     console.log(`tipo: `+document.querySelector("#tipo").value)
+  //     console.log(`programa: `+document.querySelector("#programa").value)
+  //     axios
+  //     .post(`/tipoPrograma`, {_csrf: this._csrf, tipo: document.querySelector("#tipo").value,
+  //     programa: document.querySelector("#programa").value})
+  //   .then((response) => {
+  //     programa_detalle.value = response.data[0].prog_descri;
+  //     console.log(response.data[0].prog_descri)
+  //       })
+  //       .catch((e) => {
+  //         console.log(e)
+  //         programa_detalle.value = "";
+  //       });
+  //   }
+  // }
 
   copiar() {
     final.value = "";

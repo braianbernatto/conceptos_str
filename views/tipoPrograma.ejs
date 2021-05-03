@@ -9,6 +9,7 @@
           <input name="programaDescri" type="text" id="addTipoProgramaDescri" class="long"/>
         </div>     
         <div class="btnActions">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>"> 
           <button for="" class="btn btnGuardar icon-plus" id="btnSaveTipoPrograma"></button>
           <button for="" class="btn btnCancelar icon-cancel" id="btnCancelTipoPrograma"></button>
         </div>
@@ -24,6 +25,7 @@
           <input name="programaDescri" type="text" id="updateTipoProgramaNroDescri" class="long"/>
         </div>
         <div class="btnActions">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>"> 
           <button for="" class=" btn btnModificar icon-arrows-cw" id="btnSaveTipoProgramaUpdate"></button>
           <button for="" class="btn btnCancelar icon-cancel" id="btnCancelTipoProgramaUpdate"></button>
         </div>
@@ -53,6 +55,7 @@
           <input name="programaDescri" type="text" id="delTipoProgramaNroDescri" class="long" readonly/>
         </div>     
         <div class="btnActions">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>"> 
           <button for="" class="btn btnEliminar icon-trash-2" id="btnSaveTipoProgramaDelete"></button>
           <button for="" class="btn btnCancelar icon-cancel" id="btnCancelTipoProgramaDelete"></button>
         </div>

@@ -1,6 +1,6 @@
 
 <%- include("includes/header") %>  
-<div class=""><button class="menuLogout icon-off" id="logout"></button></div>
+<form action="/logout" method="POST" class="logout"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="menuLogout icon-off" id="logout"></button></form>
 <%- include("includes/flash") %>  
 <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
 <%- include("rubros") %> 

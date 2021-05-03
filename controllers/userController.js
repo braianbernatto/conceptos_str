@@ -1,35 +1,63 @@
-const pool = require("../db")
+const pool = require("../db");
+const User = require("../models/User");
 
 exports.home = async function (req, res) {
+  if (req.session.user) {
     try {
-        // let caja = await pool.query("select rub_descri from rubros where rub_cod = 0")        
-        let benef = await pool.query("select * from descuentos")     
+      let benef = await pool.query("select * from descuentos");
+  
+      let mes = await pool.query("select * from mes");
+  
+      let nivel = await pool.query("select * from niveles order by 1");
+  
+      let tipo = await pool.query("select * from tipo_programa order by 2");
+  
+      if (req.session.views) {
+        req.session.views++;
+      }else{ req.session.views = 1}
 
-        let mes = await pool.query("select * from mes")   
+      console.log(req.session.views);
+     
+      res.render("main", {
+        benef: benef,
+        mes: mes,
+        views: req.session.wiews,
+        nivel: nivel,
+        tipo: tipo,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }else{
+    res.redirect("/login1");
+  }
+};
 
-        let nivel = await pool.query("select * from niveles order by 1")        
-        
-        let tipo = await pool.query("select * from tipo_programa order by 2")        
-        
-        if (req.session.views) {
-          req.session.views++
-          
-        }else{
-          req.session.views = 1
-          
-        }
-        req.session.save()
-        console.log(req.session.views)
-        res.render("main", {benef: benef, mes: mes, views: req.session.wiews, nivel: nivel, tipo: tipo})   
-        
-      } catch (error) {
-        console.log(error)
-      }
-}
+exports.login = function (req, res) {
+  let user = new User(req.body);
+  user
+    .login()
+    .then(function (user) {
+      req.session.user = { user: user[0].usu_nombre };
+      req.flash("success", `Bienvenido ${user[0].usu_nombre}`);
+      req.session.save(function () {
+        res.redirect("/");
+      });
+      
+    })
+    .catch(function (e) {
+      req.flash("errors", e);
+      req.session.save();
+      res.redirect("/login1");
+    });
+};
 
-exports.logOut = function (req, res) {
-  console.log(req.session)   
-  req.session.destroy()
-  console.log(req.session)   
-  res.send("You are now logged out")
-}
+exports.logForm = function (req, res) {
+  res.render("login");
+};
+
+exports.logout = function (req, res) {
+  req.session.destroy(function () {
+    res.redirect("/login1");
+  });
+};

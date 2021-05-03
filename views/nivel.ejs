@@ -8,6 +8,7 @@
           <input name="nivelDescri" type="text" id="addNivelDescri" class="long" placeholder="Descripción"/>
         </div>
         <div class="btnActions">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>"> 
           <button for="" class="btn btnGuardar icon-plus" id="btnSaveNivel"></button>
           <button for="" class="btn btnCancelar icon-cancel" id="btnCancelNivel"></button>
         </div>
@@ -22,6 +23,7 @@
           <input name="nivelDescri" type="text" id="updateNivelDescri" class="long">
         </div>
         <div class="btnActions">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>"> 
           <button for="" class=" btn btnModificar icon-arrows-cw" id="btnSaveNivelUpdate"></button>
           <button for="" class="btn btnCancelar icon-cancel" id="btnCancelNivelUpdate"></button>
         </div>
@@ -48,6 +50,7 @@
           <input name="nivelDescri" type="text" id="delNivelDescri" class="long" readonly/>
         </div>      
         <div class="btnActions">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>"> 
           <button for="" class="btn btnEliminar icon-trash-2" id="btnSaveNivelDelete"></button>
           <button for="" class="btn btnCancelar icon-cancel" id="btnCancelNivelDelete"></button>
         </div>

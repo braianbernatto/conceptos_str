@@ -136,22 +136,6 @@ button {
 
 }
 
-.login{
-  max-width: 400px;
-}
-
-.login .menuLogin{
-  display: flex;
-  position: relative;
-}
-
-.menuLogout{
-  display: flex;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
 .addForm, .updateForm, .deleteForm{  
   display: none;
   flex-direction: column;
@@ -463,6 +447,38 @@ table td{
   margin-right: 18px;
 }
 
+.login{
+  max-width: 400px;
+}
+
+.menuLogin{
+  display: flex;
+  color: rgb(92, 92, 92);
+}
+
+.login .btn{
+  color: rgb(92, 92, 92);
+}
+
+.menuLogin:active{
+  transform: translateX(7px);
+  color: rgb(0, 0, 0);
+}
+
+.logout{
+  display: flex;
+  position: absolute;
+  height: 50px;
+  top: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuLogout {
+  display: flex;
+  position: absolute;
+  left: 5px;
+}
 /* #deleteFormNivel{
   display: flex;
 } */
