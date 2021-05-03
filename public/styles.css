@@ -113,7 +113,7 @@ button {
 .L6 {
   margin-right: 99px;
 }
-.container{
+.container, .container2{
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -135,7 +135,9 @@ button {
   background-color: rgba(255, 255, 255, 0.171);
 
 }
-
+.container2{
+  
+}
 .addForm, .updateForm, .deleteForm{  
   display: none;
   flex-direction: column;
