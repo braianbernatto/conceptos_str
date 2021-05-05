@@ -12,13 +12,15 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
+app.set('trust proxy', 1) // trust first proxy
 
 let sessionOptions = session({
     secret: process.env.SESSIONPASS,
     store: new (require('connect-pg-simple')(session))(),
     resave: false,
     saveUninitialized: false,
-    cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true}    
+    cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true},
+    // ssl: true 
 })
 
 app.use(sessionOptions)
