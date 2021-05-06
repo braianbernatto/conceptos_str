@@ -3,6 +3,7 @@ dotenv.config()
 const Pool = require("pg-promise")({})
 
 //`postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}?ssl=true`
+
 const pool = Pool({
     user: process.env.PGUSER,
     host: process.env.PGHOST,
