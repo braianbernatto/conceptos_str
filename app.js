@@ -5,7 +5,7 @@ const cors = require("cors")
 const flash = require("connect-flash")
 const session = require("express-session")
 const pgSession = require('connect-pg-simple')(session)
-const pool = require("./db")
+const pg = require('pg')
 
 
 // middleware
@@ -15,15 +15,23 @@ app.use(express.urlencoded({extended: false}))
 
 // app.set('trust proxy', 1) // trust first proxy
 
-let sessionOptions = session({
-    store: new pgSession({pool : pool.$pool}),
-    secret: process.env.SESSIONPASS,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true},
-})
+var pgPool = new pg.Pool({
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
+    ssl: {rejectUnauthorized : false}
+});
+ 
+app.use(session({
+  store: new pgSession({pool : pgPool,}),
+  secret: process.env.SESSIONPASS,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true},
+}));
 
-app.use(sessionOptions)
 app.use(flash())
 
 
