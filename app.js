@@ -9,9 +9,9 @@ const pg = require('pg')
 
 
 // middleware
+app.use(express.urlencoded({extended: false}))
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({extended: false}))
 
 // app.set('trust proxy', 1) // trust first proxy
 
@@ -21,7 +21,7 @@ var pgPool = new pg.Pool({
     database: process.env.PGDATABASE,
     password: process.env.PGPASSWORD,
     port: process.env.PGPORT,
-    ssl: {rejectUnauthorized : false}
+    ssl: process.env.PGHOST == "localhost" ? false : {rejectUnauthorized : false}
 });
  
 app.use(session({
