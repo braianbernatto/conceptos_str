@@ -7,7 +7,7 @@ const BeneficiariosController = require("./controllers/beneficiariosController")
 const NivelController = require("./controllers/nivelController")
 
 // rubros related routes
-router.get("/", UserController.logForm)
+router.get("/", UserController.home)
 router.post("/rubrosByNro", RubrosController.byNro)
 router.post("/nivelById", RubrosController.nivel)
 router.post("/tipoPrograma", TipoProgramaController.getTipoPrograma)
