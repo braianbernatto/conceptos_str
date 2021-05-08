@@ -53,7 +53,7 @@ exports.login = function (req, res) {
 };
 
 exports.logForm = function (req, res) {
-  res.render("login");
+  res.render("loginForm");
 };
 
 exports.logout = function (req, res) {

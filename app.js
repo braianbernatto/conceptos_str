@@ -25,7 +25,7 @@ var pgPool = new pg.Pool({
 });
  
 app.use(session({
-  store: new pgSession({pool : pgPool,}),
+  store: new pgSession({pool : pgPool}),
   secret: process.env.SESSIONPASS,
   resave: false,
   saveUninitialized: false,
