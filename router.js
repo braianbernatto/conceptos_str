@@ -31,7 +31,7 @@ router.post("/deleteTipoPrograma/:id/:id2", TipoProgramaController.deleteTipoPro
 router.post("/updateTipoPrograma", TipoProgramaController.updateTipoPrograma)
 
 // user related routes
-router.get("/login1", UserController.logForm)
+router.get("/login", UserController.logForm)
 router.post("/login", UserController.login)
 router.post("/logout", UserController.logout)
 

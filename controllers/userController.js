@@ -29,7 +29,7 @@ exports.home = async function (req, res) {
       console.log(error);
     }
   }else{
-    res.redirect("/login1");
+    res.redirect("/login");
   }
 };
 
@@ -48,7 +48,7 @@ exports.login = function (req, res) {
     .catch(function (e) {
       req.flash("errors", e);
       req.session.save();
-      res.redirect("/login1");
+      res.redirect("/login");
     });
 };
 
@@ -58,6 +58,6 @@ exports.logForm = function (req, res) {
 
 exports.logout = function (req, res) {
   req.session.destroy(function () {
-    res.redirect("/login1");
+    res.redirect("/login");
   });
 };
