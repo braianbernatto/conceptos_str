@@ -98,16 +98,16 @@ let tipoCrud = {
 document.querySelector("#rubro_nro").value = "";
 document.querySelector("#rubro_detalle").value = 0;
 benefSelect.value = 0;
-setTimeout(() => {
+timeOutRed[4] = setTimeout(() => {
   rubroNro.focus();
 }, 1000);
 
 // flash messages fading out and then removed
-setTimeout(() => {
+timeOutRed[5] = setTimeout(() => {
   let flash = document.querySelectorAll(".flashContainer");
   flash.forEach((o) => o.classList.remove("animate__bounceInRight"));
   flash.forEach((o) => o.classList.add("animate__fadeOutRight"));
-  setTimeout(() => {
+timeOutRed[6] =  setTimeout(() => {
     flash.forEach((o) => o.remove());
   }, 2000);
 }, 5000);
@@ -272,19 +272,6 @@ export default class rubros {
         document.getElementById("boton1").focus();
       }
     });
-
-    // actions for cancel button
-    // document
-    //   .querySelector("#btnCancelar")
-    //   .addEventListener("click", function (event) {
-    //     event.preventDefault();
-    //     axios
-    //       .post(`/logout`)
-    //       .then((response) => {})
-    //       .catch(() => {});
-    //   });
-
-    //
 
     // menu buttons action
     btnRubro.addEventListener("click", () => {
