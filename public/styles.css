@@ -489,4 +489,7 @@ table td{
   html {
     font-size: 10px;
   }  
+  .login{
+    max-width: 300px;
+  }
 }
