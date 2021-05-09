@@ -385,6 +385,7 @@ footer {
 
 
 table{
+  font-size: 1rem;
   border-collapse: collapse;
   color: #777;
   width: 100%;
@@ -417,12 +418,15 @@ tbody{
   scrollbar-width: auto;
 }
 
+.tbNivel th:first-child{
+  text-align: center;
+}
 .tbNivel td:first-child{
   text-align: center;
-  width: 9%;
+  width: 1%;
 }
 .tbNivel td:last-child{
-  width: 70%;
+  width: 56%;
 }
 
 .tbTipo td{
