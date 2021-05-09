@@ -1,6 +1,14 @@
 
 <%- include("includes/header") %>  
-<form action="/logout" method="POST" class="logout"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="menuLogout icon-off" id="logout"></button></form>
+<form action="/logout" method="POST" class="logout">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <button class="menuLogout icon-off tooltip" id="logout">
+    <div class="right">
+        <h3>Cerrar sesión</h3>
+        <i></i>
+  </div>
+</button>
+</form>
 <%- include("includes/flash") %>  
 <!-- ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -->
 <%- include("rubros") %> 
