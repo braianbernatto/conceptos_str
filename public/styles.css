@@ -484,7 +484,7 @@ table td{
     font-size: 13px;
   }  
   .menu{
-    left: 5rem;
+    left: 5.125rem;
   }
 }
 @media screen and (max-width: 375px) {
