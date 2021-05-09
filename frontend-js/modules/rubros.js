@@ -535,13 +535,13 @@ export default class rubros {
       document.querySelector(menu.btnUpdate).style.transform = "translate(0)";
       document.querySelector(menu.btnDelete).style.transform = "translate(0)";
 
-      setTimeout(() => {
+      setTimeout(() => {    
         document.querySelector(menu.btnAdd).style.transform =
-          "translate(-40px , -30px)";
+          "translate(-2.5rem , -1.875rem)";
         document.querySelector(menu.btnUpdate).style.transform =
-          "translateX(-80px)";
+          "translateX(-5rem)";
         document.querySelector(menu.btnDelete).style.transform =
-          "translate(-40px , 30px)";
+          "translate(-2.5rem , 1.875rem)";
       }, 50);
       buttonFlag = 1;
     } else {
