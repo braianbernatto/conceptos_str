@@ -39,7 +39,9 @@ exports.login = function (req, res) {
     .login()
     .then(function (user) {
       req.session.user = { user: user[0].usu_nombre };
-      req.flash("success", `Bienvenido ${user[0].usu_nombre}`);
+      let gender = user[0].usu_sexo
+      gender = gender.trim() == "m"? "o" : "a"            
+      req.flash("success", `Bienvenid${gender} ${user[0].usu_nombre}`);
       req.session.save(function () {
         res.redirect("/");
       });
