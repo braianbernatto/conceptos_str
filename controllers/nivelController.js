@@ -36,7 +36,7 @@ exports.deleteNivel = function (req, res) {
       req.session.save(() => res.redirect(`/`));
     })
     .catch((error) => {
-      req.flash("errors", error);
+      req.flash("errors", error.detail);
       console.log(error);
       req.session.save(() => res.redirect(`/`));
     });

@@ -4,9 +4,9 @@ const User = require("../models/User");
 exports.home = async function (req, res) {
   if (req.session.user) {
     try {
-      let benef = await pool.query("select * from descuentos");
+      let benef = await pool.query("select * from descuentos order by 1");
   
-      let mes = await pool.query("select * from mes");
+      let mes = await pool.query("select * from mes order by 1");
   
       let nivel = await pool.query("select * from niveles order by 1");
   
