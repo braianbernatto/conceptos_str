@@ -152,12 +152,11 @@ export default class rubros {
       });
 
     // actions after focus out from rubros
-    rubroNro.addEventListener("focusout", () => {
+    rubroNro.addEventListener("blur", () => {
       if (rubroNro.value != rubroAnterior) {
         rubroAnterior = rubroNro.value;
         this.removeRubros();
         this.injectHTML();
-      } else {
       }
     });
 
@@ -248,8 +247,10 @@ export default class rubros {
         // Cancel the default action, if needed
         event.preventDefault();
         // Trigger the button element with a click
-        programa.focus();
-        programa.select();
+        if(tipo.value.trim()!=""){
+          programa.focus();
+          programa.select();
+        }
       }
     });
 
@@ -258,8 +259,10 @@ export default class rubros {
       if (event.keyCode === 13) {
         // Cancel the default action, if needed
         event.preventDefault();
-        // Trigger the button element with a click
-        document.getElementById("boton1").focus();
+        if(programa.value.trim()!=""){
+          // Trigger the button element with a click
+          document.getElementById("boton1").focus();
+        }
       }
     });
 
@@ -680,44 +683,6 @@ export default class rubros {
       });
   }
 
-  // cajaChica() {
-  //   rubroNro.focus();
-  //   rubroNro.value = 0;
-  //   nivel.value = 0;
-  //   axios
-  //     .post(`/rubrosByNro`, {_csrf: this._csrf, nro: 0 })
-  //     .then((response) => {
-  //       final.value = response.data[0].rub_descri;
-  //       /* Select the text field */
-  //       final.select();
-  //       /* Copy the text inside the text field */
-  //       document.execCommand("copy");
-
-  //       rubroNro.select();
-  //     })
-  //     .catch(() => {
-  //       final.value = "No hay datos de caja chica";
-  //     });
-  // }
-
-  // tipoPrograma() {
-  //   if (tipo.value.trim() != "" && programa.value.trim() != "") {
-  //     console.log(`tipo: `+document.querySelector("#tipo").value)
-  //     console.log(`programa: `+document.querySelector("#programa").value)
-  //     axios
-  //     .post(`/tipoPrograma`, {_csrf: this._csrf, tipo: document.querySelector("#tipo").value,
-  //     programa: document.querySelector("#programa").value})
-  //   .then((response) => {
-  //     programa_detalle.value = response.data[0].prog_descri;
-  //     console.log(response.data[0].prog_descri)
-  //       })
-  //       .catch((e) => {
-  //         console.log(e)
-  //         programa_detalle.value = "";
-  //       });
-  //   }
-  // }
-
   copiar() {
     final.value = "";
     let tipo = document.getElementById("tipo").value;
@@ -764,8 +729,8 @@ export default class rubros {
         final.select();
         /* Copy the text inside the text field */
         document.execCommand("copy");
-        rubroNro.select();
         benefSelect.value = 0;
+        rubroNro.select();
       } else if (
         tipo.trim() == "" ||
         programa.trim() == "" ||
